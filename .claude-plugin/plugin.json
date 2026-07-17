@@ -1,0 +1,13 @@
+{
+  "name": "solid-node-shop",
+  "displayName": "solid-node shop",
+  "version": "0.1.0",
+  "description": "An agent shop for building 3D-printable mechanical CAD projects with solid-node: a drawing office that designs and specs, a machinist that builds parts test-first, a librarian for CAD-library research, and a toolmaker for framework contributions.",
+  "author": {
+    "name": "Luis Fagundes"
+  },
+  "homepage": "https://github.com/lhfagundes/solid-node",
+  "repository": "https://github.com/lhfagundes/solid-node",
+  "license": "Apache-2.0",
+  "keywords": ["cad", "mechanical", "3d-printing", "solid-node", "cadquery", "tdd"]
+}
