@@ -3,26 +3,29 @@
 # setup — bootstrap the shop workspace, in one of two tiers.
 #
 #   scripts/setup             tier 1 (plain): venv + pip install solid-node
-#   scripts/setup dev [ref]   tier 2 (development): the framework as a git
-#                             working copy (latest release tag by default,
-#                             or the given tag/branch/sha), editable
-#                             install, frontend built from source
+#   scripts/setup dev [ref]   tier 2 (development): the framework
+#                             SUBMODULE checked out (the commit this
+#                             shop pins by default, or the given
+#                             tag/branch/sha), editable install,
+#                             frontend built from source
 #
 # Tier 1 is enough to BUILD projects with the shop: the wheel ships the
 # prebuilt viewer and widget, no toolchain needed beyond Python and
-# OpenSCAD. Tier 2 is the contributor bench: the framework as a working
-# copy so the toolmaker can branch, test and PR, and the frontend
-# (viewer app + widget) built from source so it can be worked on — the
-# widget is the framework's largest growing surface, and the dev bench
-# must never constrain it.
+# OpenSCAD; the framework submodule stays uninitialized. Tier 2 is the
+# contributor bench: the submodule initialized as a working copy so the
+# toolmaker can branch, test and PR, and the frontend (viewer app +
+# widget) built from source so it can be worked on — the widget is the
+# framework's largest growing surface, and the dev bench must never
+# constrain it.
 #
 # Running `setup dev` on a tier-1 workspace upgrades it in place (the
 # pip-installed solid-node is replaced by the editable working copy).
 # Both tiers are idempotent — re-run freely.
 #
 # Env overrides:
-#   SOLID_NODE_REPO   clone URL (default: the upstream framework repo;
-#                     point it at your fork to develop against that)
+#   SOLID_NODE_REPO   submodule clone URL (default: the URL recorded in
+#                     .gitmodules; point it at your fork to develop
+#                     against that)
 
 set -euo pipefail
 
@@ -30,7 +33,6 @@ SHOP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="$SHOP_ROOT/.venv"
 PIP="$VENV/bin/pip"
 FRAMEWORK_DIR="$SHOP_ROOT/solid-node"
-FRAMEWORK_REPO="${SOLID_NODE_REPO:-https://github.com/LibreSolid/solid-node.git}"
 
 say() { echo "setup: $*"; }
 die() { echo "setup: $*" >&2; exit 1; }
@@ -57,29 +59,26 @@ tier1() {
   say "upgrade to the contributor bench anytime: scripts/setup dev"
 }
 
-latest_tag() {  # in $FRAMEWORK_DIR; empty if the repo has no tags
-  git -C "$FRAMEWORK_DIR" tag --sort=-v:refname | head -1
-}
-
 tier2() {
   local ref="${1:-}"
 
-  if [ ! -d "$FRAMEWORK_DIR/.git" ]; then
-    say "cloning framework: $FRAMEWORK_REPO -> $FRAMEWORK_DIR"
-    git clone "$FRAMEWORK_REPO" "$FRAMEWORK_DIR"
+  # The framework is a git SUBMODULE at solid-node/: the shop repo pins
+  # the framework commit it is known to work with. .git is a FILE in an
+  # initialized submodule checkout — test existence, not directoriness.
+  if [ -n "${SOLID_NODE_REPO:-}" ]; then
+    say "submodule URL override: $SOLID_NODE_REPO"
+    git -C "$SHOP_ROOT" config submodule.solid-node.url "$SOLID_NODE_REPO"
+  fi
+  if [ ! -e "$FRAMEWORK_DIR/.git" ]; then
+    say "initializing framework submodule at its pinned commit"
+    git -C "$SHOP_ROOT" submodule update --init solid-node
   else
-    say "framework clone present, fetching"
+    say "framework working copy present, fetching"
     git -C "$FRAMEWORK_DIR" fetch --tags --prune
   fi
 
-  if [ -z "$ref" ]; then
-    ref="$(latest_tag)"
-    if [ -z "$ref" ]; then
-      say "no release tags found — staying on the default branch"
-    fi
-  fi
   if [ -n "$ref" ]; then
-    say "checking out $ref"
+    say "checking out $ref (submodule detaches from the pinned commit)"
     git -C "$FRAMEWORK_DIR" checkout --quiet "$ref"
   fi
 
