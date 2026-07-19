@@ -1,0 +1,10 @@
+# Codex defaults for the shop foreman. Specialist agents override these in
+# .codex/agents/*.toml.
+model = "gpt-5.6-terra"
+model_reasoning_effort = "medium"
+
+[agents]
+# Allow the two product lanes plus occasional support while limiting broad
+# token-expensive fan-out.
+max_threads = 4
+max_depth = 1

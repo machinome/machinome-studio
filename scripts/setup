@@ -11,7 +11,7 @@
 # Tier 1 is enough to BUILD projects with the shop: the wheel ships the
 # prebuilt viewer and widget, no toolchain needed beyond Python and
 # OpenSCAD. Tier 2 is the contributor bench: the framework as a working
-# copy so the toolmaker can branch, test and PR, and the frontend
+# copy for framework development, and the frontend
 # (viewer app + widget) built from source so it can be worked on — the
 # widget is the framework's largest growing surface, and the dev bench
 # must never constrain it.

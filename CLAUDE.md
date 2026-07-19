@@ -16,17 +16,30 @@ wire it by hand:
 
 - **To run the shop** — start or advance a CAD project — read
   `skills/running-the-shop/SKILL.md` FIRST and follow it: it is the
-  foreman's loop (design → ratify → build → judge → bank). The
-  machinist's craft manual is `skills/solid-node/SKILL.md`. The
-  specialists are defined by the role cards under `agents/`.
-- **Dispatching a specialist**: the plugin's named agent types
+  foreman's pipelined loop (brief → first release → concurrent design
+  and machining → reconcile). The public contract is
+  `skills/solid-node-api/SKILL.md`; machinist craft is
+  `skills/solid-node/SKILL.md`. The specialists are defined by the
+  role cards under `agents/`.
+- **Dispatching a specialist from Claude Code**: the plugin's named agent types
   (`solid-node-shop:<name>`) do not exist here. Dispatch a
-  general-purpose subagent whose prompt carries, verbatim, the role
+  fresh general-purpose subagent whose prompt carries, exactly once and
+  verbatim, the role
   card body (`agents/<role>.md`, below the frontmatter) plus every
-  skill its frontmatter names (`skills: [solid-node]` → include
-  `skills/solid-node/SKILL.md` in the prompt). The card's rules bind
+  skill its frontmatter names (`skills: [solid-node-api, solid-node]`
+  means include both skills in the prompt). The card's rules bind
   exactly as if the plugin had loaded them — including its STOP-and-
-  report refusals. Honor the card's `model:` field when dispatching.
+  report refusals. Honor the card's `model:` field when dispatching. Do
+  not also inherit a context containing those files.
+- **Do not use that fallback for Codex.** Codex loads the local named-agent
+  adapters under `.codex/agents/` with `fork_turns="none"`; its concise
+  dispatch contains task-local paths and evidence, not pasted role or skill
+  bodies. The exact host protocol lives in
+  `skills/running-the-shop/SKILL.md`.
+- During the current experimental evaluation, never give a product
+  agent files from another project as reference. Follow the isolation
+  rule in `skills/running-the-shop/SKILL.md` even when dispatching by
+  hand.
 - `/file-a-wart` is `skills/file-a-wart/SKILL.md`.
 
 ## The repo boundary (never skip)
