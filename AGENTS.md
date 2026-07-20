@@ -87,6 +87,9 @@ from running the mechanical shop. Do not dispatch mechanical-project roles to
 design or implement framework changes. Read the target framework checkout's
 `AGENTS.md`, architecture, baseline specs, and relevant decisions before work.
 
+Use an isolated framework worktree at `./solid-node/WTs/<name>/`; never make
+framework changes in the primary `./solid-node/` checkout.
+
 Framework work may inspect framework source because changing the framework is
 its assignment. Keep the originating project, reproduction, or contract named
 in the change so the requirement does not lose its empirical context.
@@ -171,7 +174,8 @@ The normal workspace layout is:
 
     solid-node-shop/        this repository: the harness
     solid-node/             ignored independent framework repository
-    WTs/<name>/             ignored framework worktrees
+    solid-node/WTs/<name>/  ignored framework worktrees
+    WTs/<name>/             ignored shop worktrees
     projects/<name>/        ignored independent project repositories
 
 Repository membership, not directory nesting, defines ownership. Before every
