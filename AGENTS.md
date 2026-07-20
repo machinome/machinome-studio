@@ -109,18 +109,54 @@ their effect on both product work and framework work. Preserve assistant
 portability: keep durable process in repository files and skills rather than
 depending on one vendor's hidden state or conversation memory.
 
-Shop product development is story-first:
+Perform shop changes in a dedicated worktree, leaving the pilot-controlled
+primary checkout alone unless the pilot explicitly directs work there. Before
+editing, assess whether the requested change requires an OpenSpec cycle. Use
+OpenSpec whenever the pilot asks for it and normally for a new or changed
+user-visible behavior, a story or sprint outcome, a consequential interface or
+architecture decision, or work that needs ratification and durable behavioral
+specs.
 
-1. The pilot writes user stories in `docs/product/stories/`.
-2. Select one story or a coherent group and use it as the input to an OpenSpec
-   proposal.
-3. Ratify the proposal's observable behavioral specs before settling its
-   architecture.
-4. Record consequential architectural choices as candidate decisions in the
-   change's `design.md`, and ratify them before implementation.
-5. After successful implementation, promote accepted decisions to permanent
-   ADRs under `docs/adrs/` and archive the OpenSpec change into the baseline
-   specs.
+A narrow adjustment may proceed without OpenSpec when it preserves ratified
+behavior and architecture—for example, a small correction, repository hygiene,
+or an equivalent maintenance edit. This is a judgment exception, not a route
+around proposal or ratification. If the classification is uncertain, the work
+expands beyond the adjustment, or skipping OpenSpec could conceal a product or
+architecture choice, stop before editing and confirm the direct path with the
+pilot. Direct adjustments still use a correctly based worktree, focused commit,
+proportionate validation, integration into the appropriate branch, and safe
+worktree cleanup.
+
+### Sprint, worktree, and OpenSpec/ADR cycle
+
+Read `skills/sprint/SKILL.md` for any sprint-scoped shop work, including a
+direct adjustment that does not require OpenSpec. The current sprint is
+defined by `docs/product/sprints/current.md` on the
+pilot-controlled primary branch. After that definition is ratified and
+committed, branch its integration line into `WTs/sprint-NNN`. Each OpenSpec
+cycle then receives a sibling worktree and branch from the current sprint
+branch; it never branches directly from an assumed primary-branch state.
+
+The sprint worktree is an integration line, not an implementation bench. Each
+cycle worktree opens when proposal work begins and contains the complete
+two-commit OpenSpec cycle:
+
+1. propose, ratify, validate, and commit the planning artifacts; then
+2. apply red-first, test, promote accepted ADRs, sync baseline specs, archive
+   the OpenSpec change, and commit the completed implementation record.
+
+After the second commit, integrate and verify the cycle on `sprint-NNN` before
+removing its clean worktree. The next cycle branches from that advanced sprint
+HEAD. An archived OpenSpec change is not complete sprint work until its commits
+are integrated into the sprint branch. Never force-remove a dirty worktree or
+silently resolve divergent branches.
+
+Archive the sprint record on the sprint branch only after every included story
+is integrated, explicitly deferred, or removed by a recorded pilot decision.
+The pilot controls integration of `sprint-NNN` into the primary branch. Remove
+the sprint worktree only after the primary branch contains the archived sprint
+record and no `current.md`. Worktree removal never implies permission to delete
+a branch, push, publish, or disturb unrelated worktrees.
 
 User stories and behavioral specs describe user-visible needs and outcomes,
 not orchestration, transports, payload formats, blocking behavior, or other
@@ -190,6 +226,8 @@ instructions. Keep those adapters aligned whenever a role is added or renamed.
 - `README.md` — product and workspace overview.
 - `CLAUDE.md` — direct-checkout bootstrap and dispatch fallback.
 - `.codex/` — Codex foreman defaults and custom specialist agents.
+- `skills/sprint/SKILL.md` — sprint state, branching, integration, and
+  worktree lifecycle.
 - `skills/running-the-shop/SKILL.md` — foreman's mechanical-project loop.
 - `skills/solid-node-api/SKILL.md` — complete stable public API.
 - `skills/solid-node/SKILL.md` — machinist craft manual.
