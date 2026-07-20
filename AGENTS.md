@@ -83,9 +83,10 @@ It must return that exact project directory.
 
 Framework development also starts in this repository, normally from an
 empirical finding surfaced by a project agent, but it is a separate discipline
-from running the mechanical shop. Do not dispatch mechanical-project roles to
-design or implement framework changes. Read the target framework checkout's
-`AGENTS.md`, architecture, baseline specs, and relevant decisions before work.
+from running the mechanical shop. Read `skills/framework-change/SKILL.md`
+first for every framework mutation. Do not dispatch mechanical-project roles
+to design or implement framework changes. Read the target framework checkout's
+architecture, baseline specs, and relevant decisions before work.
 
 Use an isolated framework worktree at `./solid-node/WTs/<name>/`; never make
 framework changes in the primary `./solid-node/` checkout.
@@ -100,6 +101,11 @@ private bootstrap, follow the pilot's explicit direction about which portions
 to exercise. Never silently present an unratified interface as settled, and
 never silently substitute a different design when implementation evidence
 contradicts the proposed one.
+
+All agent prompts and framework-development orchestration live in this shop.
+Never read or rely on a framework-local `AGENTS.md`, assistant command, or
+copied agent workflow as authority. The framework repository owns its source,
+tests, OpenSpec records, architecture, and ADRs—not agent prompts.
 
 Framework commits belong only to a solid-node repository or one of its
 worktrees. Mechanical-project commits never do.
@@ -240,6 +246,8 @@ instructions. Keep those adapters aligned whenever a role is added or renamed.
 - `.codex/` — Codex foreman defaults and custom specialist agents.
 - `skills/sprint/SKILL.md` — sprint state, branching, integration, and
   worktree lifecycle.
+- `skills/framework-change/SKILL.md` — non-sprint framework proposal,
+  ratification, implementation, two-commit record, integration, and cleanup.
 - `skills/running-the-shop/SKILL.md` — foreman's mechanical-project loop.
 - `skills/solid-node-api/SKILL.md` — complete stable public API.
 - `skills/solid-node/SKILL.md` — machinist craft manual.

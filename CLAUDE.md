@@ -6,7 +6,8 @@ This checkout is two things at once:
    workspace scripts are versioned here. Editing them IS developing
    the next shop version.
 2. **A live workspace** — the framework working copy at `solid-node/`
-   (untracked), benches at `WTs/`, projects at `projects/<name>`
+   (untracked), framework benches at `solid-node/WTs/`, shop worktrees at
+   `WTs/`, and projects at `projects/<name>`
    (each its OWN git repository, untracked here).
 
 ## Working here directly (plugin not installed)
@@ -41,6 +42,10 @@ wire it by hand:
   rule in `skills/running-the-shop/SKILL.md` even when dispatching by
   hand.
 - `/file-a-wart` is `skills/file-a-wart/SKILL.md`.
+- **To change the framework** — read `skills/framework-change/SKILL.md` first.
+  Every mutation uses a non-sprint OpenSpec cycle in a dedicated
+  `solid-node/WTs/<change>` worktree. Agent prompts live here in the shop;
+  never read or rely on a framework-local `AGENTS.md` or copied workflow.
 
 ## The repo boundary (never skip)
 
@@ -62,7 +67,7 @@ into the framework repo.
   version is the pilot's choice and is NOT pinned by this repo).
 - Venv: `.venv/` — the CLI is `.venv/bin/solid`.
 - Framework benches: `scripts/dev-env <name> setup|teardown` →
-  worktrees at `WTs/<name>` with per-slot ports; run from inside a
+  worktrees at `solid-node/WTs/<name>` with per-slot ports; run from inside a
   bench so its `.env` is picked up, and use `PYTHONPATH="$PWD"` with
   the workspace venv to run the bench's own code.
 - Projects: `git init` a new project at `projects/<name>` and commit
@@ -70,7 +75,7 @@ into the framework repo.
 
 ## Developing the shop itself
 
-Shop changes (skills, role cards, scripts, governance) are ordinary
-commits in this repo — one commit per coherent change. Lessons about
-the craft belong in the skills, not in this file: this file only
-bootstraps a session; the skills are the product.
+Shop changes (skills, role cards, scripts, governance) follow the shop's
+worktree and, when applicable, sprint/OpenSpec protocol. Lessons about the
+craft belong in the skills, not in this file: this file only bootstraps a
+session; the skills are the product.

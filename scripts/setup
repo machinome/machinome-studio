@@ -104,7 +104,8 @@ tier2() {
   fi
 
   say "done. Framework working copy: $FRAMEWORK_DIR ($(git -C "$FRAMEWORK_DIR" describe --tags --always))"
-  say "worktrees for framework work: scripts/dev-env <name> setup"
+  say "framework worktrees: $FRAMEWORK_DIR/WTs/<name>"
+  say "create one with: scripts/dev-env <name> setup"
 }
 
 ensure_venv
