@@ -130,6 +130,14 @@ pilot. Direct adjustments still use a correctly based worktree, focused commit,
 proportionate validation, integration into the appropriate branch, and safe
 worktree cleanup.
 
+An active sprint does not make unrelated shop maintenance sprint-scoped. Use
+the sprint workflow only when the work advances a story, outcome, or other
+scope explicitly recorded in that sprint, or when the pilot labels it as sprint
+work. Do not place an unrelated adjustment on a sprint branch merely because
+`current.md` exists. When the pilot explicitly directs an edit in the primary
+checkout, make the focused change and commit there instead of creating a shop
+or sprint worktree.
+
 ### Sprint, worktree, and OpenSpec/ADR cycle
 
 Read `skills/sprint/SKILL.md` for any sprint-scoped shop work, including a
