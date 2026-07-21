@@ -184,6 +184,11 @@ to the pilot rather than silently changing the spec.
 
 ## Workspace and repository boundaries
 
+- Resolve all relative workspace paths from the primary shop checkout; from a
+  shop worktree, locate it through Git's common directory.
+- Never inspect or use sibling repositories or their executables. If an
+  expected path inside this workspace is absent, stop and report it.
+
 The normal workspace layout is:
 
     solid-node-shop/        this repository: the harness
