@@ -57,7 +57,7 @@ consequential pilot decisions; it does not machine parts itself. The relevant
 roles are under `agents/`. `skills/solid-node-api/SKILL.md` is the complete
 public contract; `skills/solid-node/SKILL.md` is machinist craft.
 
-The drawing office uses the public API and never inspects framework
+The designer uses the public API and never inspects framework
 implementation. The machinist starts from that API and may inspect narrowly
 relevant framework source or tests to diagnose a concrete active-project
 question. It may never modify the framework during product work, depend on a
@@ -213,7 +213,7 @@ archives merely because the outer shop repository does not track them.
   purpose, major architecture, consequential interfaces, manufacturing or
   safety assumptions, or would risk substantial rework.
 - `docs/design.md` and increment specs are a mechanical project's durable
-  record. The drawing office owns them; released specs are committed and
+  record. The designer owns them; released specs are committed and
   immutable while machining. The machinist owns project code and tests.
   Framework specs, change artifacts, ADRs, tests, and history are the
   framework's durable record. Skills and role cards are the shop's durable

@@ -8,7 +8,7 @@
     {
       "name": "solid-node-shop",
       "source": "./",
-      "description": "The agent shop: drawing office, machinist, and librarian for solid-node mechanical CAD projects."
+      "description": "The experimental agent shop: designer, machinist, and librarian for solid-node mechanical CAD projects."
     }
   ]
 }

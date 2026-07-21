@@ -2,7 +2,7 @@
   "name": "solid-node-shop",
   "displayName": "solid-node shop",
   "version": "0.1.0",
-  "description": "An agent shop for building 3D-printable mechanical CAD projects with solid-node: a drawing office that designs and specs, a machinist that builds parts test-first, and a librarian for CAD-library research.",
+  "description": "An experimental agent shop for building 3D-printable mechanical CAD projects with solid-node: a designer, a test-first machinist, and a CAD-library librarian.",
   "author": {
     "name": "Luis Fagundes"
   },

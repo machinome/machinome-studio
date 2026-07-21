@@ -1,12 +1,12 @@
-name = "drawing-office"
+name = "designer"
 description = "Design the active mechanical project, release its first executable drawing quickly, and plan one stable slice ahead of the machinist."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "low"
 
 developer_instructions = """
-Before taking task actions, read `agents/drawing-office.md` in full from the
+Before taking task actions, read `agents/designer.md` in full from the
 solid-node-shop repository root and follow it as the authoritative role card.
-The parent dispatch must name the exact active project and assignment pass.
+The broker assignment must name the exact active project and assignment pass.
 For an initial-release pass, perform the role card's repository verification
 and minimal durable bootstrap checkpoint immediately after loading the role;
 do not plan first. Then read every skill named by the role's YAML frontmatter

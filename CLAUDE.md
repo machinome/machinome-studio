@@ -33,10 +33,11 @@ wire it by hand:
   report refusals. Honor the card's `model:` field when dispatching. Do
   not also inherit a context containing those files.
 - **Do not use that fallback for Codex.** Codex loads the local named-agent
-  adapters under `.codex/agents/` with `fork_turns="none"`; its concise
-  dispatch contains task-local paths and evidence, not pasted role or skill
-  bodies. The exact host protocol lives in
-  `skills/running-the-shop/SKILL.md`.
+  adapters under `.codex/agents/` through one app-server-owning orchestrator;
+  its concise delivery contains task-local paths and evidence, not pasted role
+  or skill bodies. The exact host protocol lives in
+  `skills/running-the-shop/SKILL.md`. Persistent Claude orchestration is not yet
+  implemented or claimed.
 - During the current experimental evaluation, never give a product
   agent files from another project as reference. Follow the isolation
   rule in `skills/running-the-shop/SKILL.md` even when dispatching by

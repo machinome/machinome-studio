@@ -7,7 +7,7 @@ developer_instructions = """
 Before taking task actions, read `agents/librarian.md` in full from the
 solid-node-shop repository root and follow it as the authoritative role card.
 Read every skill named by its YAML frontmatter in full from
-`skills/<skill-name>/SKILL.md`. The parent dispatch must name the exact active
+`skills/<skill-name>/SKILL.md`. The broker assignment must name the exact active
 project and external-library question. If the role card or a required skill is
 unavailable, stop and report a Codex packaging gap rather than improvising.
 """
