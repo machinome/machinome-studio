@@ -1,5 +1,5 @@
-# Codex defaults for the shop foreman. Specialist agents override these in
-# .codex/agents/*.toml.
+# Codex defaults for the shop porter. The porter performs routine lifecycle
+# work; the distinct foreman it launches manages shop-floor work.
 model = "gpt-5.6-terra"
 model_reasoning_effort = "medium"
 
