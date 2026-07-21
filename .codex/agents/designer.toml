@@ -4,7 +4,9 @@ model = "gpt-5.6-luna"
 model_reasoning_effort = "low"
 
 developer_instructions = """
-Before taking task actions, read `agents/designer.md` in full from the
+For a broker message with an `ASSIGNMENT LIFECYCLE GATE`, obey that gate before
+reading any file, including this role card or a skill. Otherwise, before taking
+task actions, read `agents/designer.md` in full from the
 solid-node-shop repository root and follow it as the authoritative role card.
 The broker assignment must name the exact active project and assignment pass.
 For an initial-release pass, perform the role card's repository verification
