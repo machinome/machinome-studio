@@ -71,8 +71,10 @@ into the framework repo.
   worktrees at `solid-node/WTs/<name>` with per-slot ports; run from inside a
   bench so its `.env` is picked up, and use `PYTHONPATH="$PWD"` with
   the workspace venv to run the bench's own code.
-- Projects: `git init` a new project at `projects/<name>` and commit
-  its scaffold before the first dispatch.
+- Projects: open with `python -m floor.orchestrator <name>`. The launcher
+  resolves only `projects/<name>`, creates and commits a missing `solid new`
+  scaffold, validates an existing exact repository root, and completes
+  `solid build root` before starting Floor or any role.
 
 ## Developing the shop itself
 
