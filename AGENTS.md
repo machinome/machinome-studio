@@ -244,10 +244,38 @@ Codex-native model and role defaults live in `.codex/config.toml` and
 Markdown role cards and skills instead of duplicating their operating
 instructions. Keep those adapters aligned whenever a role is added or renamed.
 
+## Architecture documentation
+
+`docs/architecture-overview.md` is the reference architecture of the shop
+as it stands — the document to read before proposing any change. The
+Architecture Decision Records under `docs/adrs/` are deltas: each records a
+single decision and its context. Their index is `docs/adrs/README.md`.
+
+- **Before proposing a change** — read the architecture overview and the
+  relevant ADRs to understand the current boundaries and the reasoning behind
+  them. A proposal that conflicts with an accepted decision must address the
+  conflict explicitly.
+- **After creating or accepting an ADR** — update the architecture overview
+  so it reflects the new state. If the ADR changes an existing boundary,
+  rewrite the affected section rather than appending a note; the overview is
+  the reference, not a log.
+- **After updating an ADR** — if the update changes the architecture, update
+  the overview. A status change alone (`Accepted` → `Superseded by NNNN`) or
+  a corrected date does not require an overview update.
+- **The ADR index** — keep `docs/adrs/README.md` current: add new ADRs,
+  update status fields, and preserve the table's chronological order.
+
+The overview is not a design document, a proposal, or a spec. It describes
+the system that exists. It is also not `AGENTS.md` — that file is the
+operating contract (lanes, worktree discipline, OpenSpec, authority). This
+file governs *how to work*; the overview governs *what the system is*.
+
 ## Useful entry points
 
 - `README.md` — product and workspace overview.
 - `CLAUDE.md` — direct-checkout bootstrap and dispatch fallback.
+- `docs/architecture-overview.md` — reference architecture; read before proposing any change.
+- `docs/adrs/README.md` — index of architecture decision records.
 - `.codex/` — Codex foreman defaults and custom specialist agents.
 - `skills/sprint/SKILL.md` — sprint state, branching, integration, and
   worktree lifecycle.
