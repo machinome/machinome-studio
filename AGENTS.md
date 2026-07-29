@@ -206,6 +206,14 @@ Preserve pre-existing dirty state and unrelated user files. In particular,
 do not delete or absorb ignored projects, framework checkouts, worktrees, or
 archives merely because the outer shop repository does not track them.
 
+`README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
+plain, tier 2 development clone at `solid-node/`), the workspace venv at
+`.venv/` whose CLI is `.venv/bin/solid`, `scripts/dev-env <name> setup|teardown`
+for per-slot framework benches, and `python -m floor.orchestrator <name>` for a
+project floor. Run bench code from inside the bench so its `.env` is picked up,
+with `PYTHONPATH="$PWD"` and the workspace venv. The shop does not pin a
+framework version; that is the pilot's choice.
+
 ## Authority and durable state
 
 - The human user is the pilot and design authority. Agents make and record
@@ -231,6 +239,11 @@ archives merely because the outer shop repository does not track them.
 The shop is intended to work from this checkout and eventually as a plugin or
 equivalent package for Claude Code, Codex, and other assistants. Today those
 surfaces are not equally mature.
+
+This file is the single operating contract for every assistant. `CLAUDE.md`
+imports it and adds only what is specific to Claude Code; it never restates or
+overrides a rule from here. Keep it that way: a rule that applies to more than
+one assistant belongs in this file.
 
 When a named plugin agent is unavailable, `CLAUDE.md` explains the direct
 checkout fallback: dispatch a general-purpose agent with the complete role
@@ -273,7 +286,7 @@ file governs *how to work*; the overview governs *what the system is*.
 ## Useful entry points
 
 - `README.md` — product and workspace overview.
-- `CLAUDE.md` — direct-checkout bootstrap and dispatch fallback.
+- `CLAUDE.md` — imports this contract; adds the Claude Code dispatch fallback.
 - `docs/architecture-overview.md` — reference architecture; read before proposing any change.
 - `docs/adrs/README.md` — index of architecture decision records.
 - `.codex/` — Codex foreman defaults and custom specialist agents.
