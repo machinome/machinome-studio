@@ -52,10 +52,12 @@ repository discipline apply.
 ### Mechanical project work
 
 Read `skills/running-the-shop/SKILL.md` first and follow its pipelined product
-loop. The main assistant is the foreman: it coordinates specialists and
-consequential pilot decisions; it does not machine parts itself. The relevant
-roles are under `agents/`. `skills/solid-node-api/SKILL.md` is the complete
-public contract; `skills/solid-node/SKILL.md` is machinist craft.
+loop. Select the repository-owned runtime profile explicitly when opening a
+floor (`builder` for direct work or `fordesmac` for the delegated pipeline).
+The main assistant coordinates specialists and consequential pilot decisions;
+it does not machine parts itself. Runtime prompts are profile-owned under
+`profiles/`; `shop-skills/solid-node-api/SKILL.md` is the complete public
+contract and `shop-skills/solid-node/SKILL.md` is machining craft.
 
 The designer uses the public API and never inspects framework
 implementation. The machinist starts from that API and may inspect narrowly
@@ -252,10 +254,9 @@ different delegation mechanism, preserve the same role boundaries,
 ratification points, repository checks, and evidence requirements rather than
 pretending vendor-specific syntax is portable.
 
-Codex-native model and role defaults live in `.codex/config.toml` and
-`.codex/agents/*.toml`. The TOML definitions deliberately load the shared
-Markdown role cards and skills instead of duplicating their operating
-instructions. Keep those adapters aligned whenever a role is added or renamed.
+Codex-native repository-development defaults live in `.codex/config.toml`.
+Runtime model, effort, tool, prompt, and skill choices belong only to selected
+profile declarations; never recreate global runtime role adapters.
 
 ## Architecture documentation
 
@@ -289,15 +290,14 @@ file governs *how to work*; the overview governs *what the system is*.
 - `CLAUDE.md` — imports this contract; adds the Claude Code dispatch fallback.
 - `docs/architecture-overview.md` — reference architecture; read before proposing any change.
 - `docs/adrs/README.md` — index of architecture decision records.
-- `.codex/` — Codex foreman defaults and custom specialist agents.
+- `.codex/` — Codex repository-development defaults.
 - `skills/sprint/SKILL.md` — sprint state, branching, integration, and
   worktree lifecycle.
 - `skills/framework-change/SKILL.md` — non-sprint framework proposal,
   ratification, implementation, two-commit record, integration, and cleanup.
-- `skills/running-the-shop/SKILL.md` — foreman's mechanical-project loop.
-- `skills/solid-node-api/SKILL.md` — complete stable public API.
-- `skills/solid-node/SKILL.md` — machinist craft manual.
-- `agents/` — specialist authority and stop conditions.
+- `skills/running-the-shop/SKILL.md` — pilot-operated mechanical-project loop.
+- `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
+- `shop-skills/` — shared runtime API and machining skills.
 - `docs/product/stories/` — pilot-authored inputs to shop OpenSpec changes.
 - `scripts/setup` — plain or development workspace bootstrap.
 - `scripts/dev-env` — isolated framework worktree benches.

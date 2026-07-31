@@ -1,36 +1,17 @@
 # solid-node shop — Claude Code entry point
 
-The operating contract is shared across assistants and lives in one
-file. Read it as part of this one:
+Read [AGENTS.md](./AGENTS.md) as the shared operating contract. This file adds
+only Claude-specific dispatch guidance.
 
-@AGENTS.md
+For a mechanical project, the operator selects a trusted runtime profile when
+opening the floor: `builder` is direct one-agent work and `fordesmac` is the
+delegated four-agent pipeline. Runtime prompts, backend choices, and allowed
+skills are profile data under `profiles/`; do not substitute `agents/*.md`,
+`.codex/agents/`, or repository `skills/` paths.
 
-Everything below is Claude-specific and adds to that contract; it never
-overrides it.
-
-## Dispatching a specialist from a direct checkout
-
-When the shop is installed as a plugin, its named agent types
-(`solid-node-shop:<name>`) do the dispatching. From this checkout they do
-not exist, so wire a specialist by hand:
-
-Dispatch a fresh general-purpose subagent whose prompt carries, exactly
-once and verbatim, the role card body (`agents/<role>.md`, below the
-frontmatter) plus every skill its frontmatter names (`skills:
-[solid-node-api, solid-node]` means include both skill bodies in the
-prompt). The card's rules bind exactly as if the plugin had loaded them —
-including its STOP-and-report refusals. Honor the card's `model:` field
-when dispatching. Do not also inherit a context containing those files.
-
-Isolation still applies: never give a product agent files from another
-project as reference, even when dispatching by hand.
-
-**Do not use this fallback for Codex.** Codex loads the local named-agent
-adapters under `.codex/agents/` through one app-server-owning
-orchestrator; its concise delivery contains task-local paths and
-evidence, not pasted role or skill bodies. The exact host protocol lives
-in `skills/running-the-shop/SKILL.md`. Persistent Claude orchestration is
-not yet implemented or claimed.
+If a host cannot launch the selected profile through the persistent backend,
+stop and report the transport limitation. Do not paste global role cards or
+expand a runtime agent's skills from repository-development instructions.
 
 ## Slash commands
 

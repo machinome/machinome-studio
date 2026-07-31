@@ -1,5 +1,5 @@
-# Codex defaults for the shop. A deterministic process owns app-server
-# lifecycle; the foreman manages shop-floor work.
+# Codex defaults for repository development. Runtime profile controls are
+# selected at floor launch and are not defined here.
 model = "gpt-5.6-terra"
 model_reasoning_effort = "medium"
 
