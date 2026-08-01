@@ -150,6 +150,26 @@ work. Do not place an unrelated adjustment on a sprint branch merely because
 checkout, make the focused change and commit there instead of creating a shop
 or sprint worktree.
 
+### CAD library catalogue
+
+`library/` is the shop's durable, evidence-backed catalogue of external reuse
+candidates for supported CAD technologies. Its directory taxonomy identifies
+the technology; its keywords identify what a maker is trying to build. A
+librarian derives search terms from the design—physical components, mechanisms,
+product categories, and manufacturing-relevant features such as `gear`,
+`bearing`, `electronics-enclosure`, `threaded-hole`, `hinge`, or `pcb-mount`—
+not from a backend or implementation detail.
+
+Never use a backend, language, generic CAD concept, file format, or operation
+as a catalogue keyword: `cadquery`, `openscad`, `jscad`, `solid2`, `python`,
+`javascript`, `stl`, `step`, `geometry`, `utility`, `import`, and `export` are
+not maker design intents. Each record names a canonical source and an explicit
+license value; use `Unknown` when evidence is ambiguous rather than guessing.
+The catalogue is an extensible research index, not a claim to enumerate all
+open-source CAD libraries, an endorsement, a compatibility guarantee, or a
+substitute for project-specific license, maintenance, geometry, manufacturing,
+and safety review.
+
 ### Sprint, worktree, and OpenSpec/ADR cycle
 
 Read `skills/sprint/SKILL.md` for any sprint-scoped work. The active sprint's
