@@ -51,35 +51,33 @@ repository discipline apply.
 
 ### Mechanical project work
 
-Read `skills/running-the-shop/SKILL.md` first and follow its pipelined product
-loop. Select the repository-owned runtime profile explicitly when opening a
-floor (`builder` for direct work or `fordesmac` for the delegated pipeline).
-The main assistant coordinates specialists and consequential pilot decisions;
-it does not machine parts itself. Runtime prompts are profile-owned under
-`profiles/`; `shop-skills/solid-node-api/SKILL.md` is the complete public
-contract and `shop-skills/solid-node/SKILL.md` is machining craft.
+Mechanical work happens on a shop floor, and the repository agent's only part in
+it is opening that floor with the parameters the pilot chose. Read
+`skills/running-the-shop/SKILL.md` and run the one launcher command it
+documents, selecting the runtime profile explicitly (`builder` for direct work
+or `fordesmac` for the delegated pipeline) and the backend the pilot named.
 
-The designer uses the public API and never inspects framework
-implementation. The machinist starts from that API and may inspect narrowly
-relevant framework source or tests to diagnose a concrete active-project
-question. It may never modify the framework during product work, depend on a
-private API, or treat a source scan as routine preparation.
+Once the floor is open, the profile's own agents do the work and the pilot
+steers them in the browser. The repository agent does not coordinate
+specialists, dispatch assignments, relay broker messages, carry the project
+thread, or machine parts. Do not paste role cards into an ad-hoc agent or
+assemble a substitute pipeline in this conversation when a launch fails; report
+the failure instead.
 
-While the shop is experimental, the foreman and product agents must not inspect
-any other mechanical project for reference: no sibling, example, archived,
-framework-example, or previously generated project files. Restrict evaluation
-context to the active project and shop-provided skills. This provisional
-isolation rule does not prevent the machinist's targeted framework diagnosis or
-the librarian's use of an external library's own materials.
+Runtime conduct is profile-owned and stated in each role's prompt under
+`profiles/`, not here: the designer's document ownership and drawing-release
+protocol, the machinist's evidence and commit discipline, the foreman's
+dispatch and one-increment-ahead pipeline, and the provisional rule keeping
+every runtime agent inside its active project. `shop-skills/solid-node-api/SKILL.md`
+is the complete public contract and `shop-skills/solid-node/SKILL.md` is
+machining craft; both are exposed to runtime agents through profile allowlists
+and are not repository-agent reading.
 
 In this workspace, every project lives at `projects/<name>/` as its own Git
-repository. A shop installed as a plugin may operate on a project elsewhere,
-but that project directory must still be its own repository root. Before
-dispatching any writer, verify:
-
-    git -C projects/<name> rev-parse --show-toplevel
-
-It must return that exact project directory.
+repository, untracked by the shop. A shop installed as a plugin may operate on a
+project elsewhere, but that project directory must still be its own repository
+root. The launcher enforces this before any agent starts, and the runtime agents
+re-verify it before writing; a reported open floor is evidence the gate passed.
 
 ### Framework work
 
@@ -266,12 +264,14 @@ imports it and adds only what is specific to Claude Code; it never restates or
 overrides a rule from here. Keep it that way: a rule that applies to more than
 one assistant belongs in this file.
 
-When a named plugin agent is unavailable, `CLAUDE.md` explains the direct
-checkout fallback: dispatch a general-purpose agent with the complete role
-card body and every skill named by its frontmatter. On assistants with a
-different delegation mechanism, preserve the same role boundaries,
-ratification points, repository checks, and evidence requirements rather than
-pretending vendor-specific syntax is portable.
+Runtime agents exist only as sessions the launcher opens from a selected
+profile. There is no fallback in which an assistant hand-assembles one by
+pasting a role card and its skills into a general-purpose agent: that produces
+an unversioned role with the wrong skills and no broker, and it silently
+replaces the thing under evaluation. When a host cannot open the selected
+profile through the persistent backend, stop and report the transport
+limitation. Porting the shop to another assistant means giving it a real
+launcher, not reproducing the roles in conversation.
 
 Codex-native repository-development defaults live in `.codex/config.toml`.
 Runtime model, effort, tool, prompt, and skill choices belong only to selected
@@ -306,7 +306,7 @@ file governs *how to work*; the overview governs *what the system is*.
 ## Useful entry points
 
 - `README.md` — product and workspace overview.
-- `CLAUDE.md` — imports this contract; adds the Claude Code dispatch fallback.
+- `CLAUDE.md` — imports this contract; adds Claude Code specifics.
 - `docs/architecture-overview.md` — reference architecture; read before proposing any change.
 - `docs/adrs/README.md` — index of architecture decision records.
 - `.codex/` — Codex repository-development defaults.
@@ -314,7 +314,8 @@ file governs *how to work*; the overview governs *what the system is*.
   worktree lifecycle.
 - `skills/framework-change/SKILL.md` — standalone or sprint-scoped framework
   proposal, ratification, implementation, integration, and cleanup.
-- `skills/running-the-shop/SKILL.md` — pilot-operated mechanical-project loop.
+- `skills/running-the-shop/SKILL.md` — opening a floor: launcher command,
+  project/profile/backend parameters, and launch failures.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
 - `shop-skills/` — shared runtime API and machining skills.
 - `docs/product/stories/` — pilot-authored inputs to shop OpenSpec changes.
