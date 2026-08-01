@@ -93,6 +93,12 @@ architecture, baseline specs, and relevant decisions before work.
 Use an isolated framework worktree at `./solid-node/WTs/<name>/`; never make
 framework changes in the primary `./solid-node/` checkout.
 
+Framework cycles are standalone by default. A framework cycle belongs to an
+active sprint only when the pilot explicitly includes it in that sprint's
+ratified scope. It then branches from and integrates into the framework's
+paired `sprint-NNN` integration line under the sprint and framework-change
+protocols; unrelated framework maintenance remains standalone.
+
 Framework work may inspect framework source because changing the framework is
 its assignment. Keep the originating project, reproduction, or contract named
 in the change so the requirement does not lose its empirical context.
@@ -148,34 +154,47 @@ or sprint worktree.
 
 ### Sprint, worktree, and OpenSpec/ADR cycle
 
-Read `skills/sprint/SKILL.md` for any sprint-scoped shop work, including a
-direct adjustment that does not require OpenSpec. The current sprint is
-defined by `docs/product/sprints/current.md` on the
-pilot-controlled primary branch. After that definition is ratified and
-committed, branch its integration line into `WTs/sprint-NNN`. Each OpenSpec
-cycle then receives a sibling worktree and branch from the current sprint
-branch; it never branches directly from an assumed primary-branch state.
+Read `skills/sprint/SKILL.md` for any sprint-scoped work. The active sprint's
+identity and ratified starting scope come from `docs/product/sprints/current.md`
+on the pilot-controlled shop primary branch. Once its integration worktree
+exists, the copy at the shop `sprint-NNN` head is the authoritative operational
+record; the primary copy remains an intentionally older active-sprint marker
+until final integration. A sprint always has shop branch and worktree
+`sprint-NNN` and `WTs/sprint-NNN`. When ratified scope includes framework work,
+it also has
+framework branch and worktree `sprint-NNN` and
+`solid-node/WTs/sprint-NNN`. The latter is linked at
+`WTs/sprint-NNN/solid-node` inside the shop sprint worktree so combined
+validation uses the exact paired integration content.
 
-The sprint worktree is an integration line, not an implementation bench. Each
-cycle worktree opens when proposal work begins and contains the complete
-two-commit OpenSpec cycle:
+Each cycle branches from the current sprint integration head in the repository
+that owns it and integrates only back into that repository. Framework cycle
+benches use `scripts/dev-env sprint-NNN-<change> setup --base sprint-NNN`.
+Dependencies between shop and framework cycles live in the sprint record and
+gate integration. Every cycle worktree opens when proposal work begins and
+contains the complete two-commit OpenSpec cycle:
 
 1. propose, ratify, validate, and commit the planning artifacts; then
 2. apply red-first, test, promote accepted ADRs, sync baseline specs, archive
    the OpenSpec change, and commit the completed implementation record.
 
-After the second commit, integrate and verify the cycle on `sprint-NNN` before
-removing its clean worktree. The next cycle branches from that advanced sprint
-HEAD. An archived OpenSpec change is not complete sprint work until its commits
-are integrated into the sprint branch. Never force-remove a dirty worktree or
-silently resolve divergent branches.
+After a cycle integrates, run relevant combined validation from the shop sprint
+worktree against its linked framework sprint worktree and record both tested
+content commits. A later commit changing only sprint evidence does not create a
+new paired product state or invalidate that result. Shop-cycle opening evidence
+travels in that cycle's planning commit so recording it cannot make the cycle
+stale. An archived change is not integrated, and repository-local integration
+is not paired validation. Never force-remove dirty worktrees or silently resolve
+stale bases, broken links, dependency blockers, or divergence.
 
-Archive the sprint record on the sprint branch only after every included story
-is integrated, explicitly deferred, or removed by a recorded pilot decision.
-The pilot controls integration of `sprint-NNN` into the primary branch. Remove
-the sprint worktree only after the primary branch contains the archived sprint
-record and no `current.md`. Worktree removal never implies permission to delete
-a branch, push, publish, or disturb unrelated worktrees.
+Archive only after every included cycle is integrated into the repository that
+owns it or coherently deferred, no dependency remains unresolved, and combined
+validation passes for the final paired content commits. The pilot controls integration of
+each `sprint-NNN` into its intended primary branch. Remove the paired worktrees
+only after both archived content commits and the shop archive commit are
+verified there. Worktree removal
+never implies permission to delete a branch, push, publish, or disturb
+unrelated worktrees.
 
 User stories and behavioral specs describe user-visible needs and outcomes,
 not orchestration, transports, payload formats, blocking behavior, or other
@@ -293,8 +312,8 @@ file governs *how to work*; the overview governs *what the system is*.
 - `.codex/` — Codex repository-development defaults.
 - `skills/sprint/SKILL.md` — sprint state, branching, integration, and
   worktree lifecycle.
-- `skills/framework-change/SKILL.md` — non-sprint framework proposal,
-  ratification, implementation, two-commit record, integration, and cleanup.
+- `skills/framework-change/SKILL.md` — standalone or sprint-scoped framework
+  proposal, ratification, implementation, integration, and cleanup.
 - `skills/running-the-shop/SKILL.md` — pilot-operated mechanical-project loop.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
 - `shop-skills/` — shared runtime API and machining skills.
