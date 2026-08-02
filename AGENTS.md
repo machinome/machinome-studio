@@ -304,6 +304,11 @@ as it stands — the document to read before proposing any change. The
 Architecture Decision Records under `docs/adrs/` are deltas: each records a
 single decision and its context. Their index is `docs/adrs/README.md`.
 
+`docs/design/README.md`, together with the HTML prototypes in `docs/design/`,
+is the reference design for the application. Treat its stated screens,
+behaviour, and fidelity requirements as the source of truth for application UI
+work.
+
 - **Before proposing a change** — read the architecture overview and the
   relevant ADRs to understand the current boundaries and the reasoning behind
   them. A proposal that conflicts with an accepted decision must address the
@@ -328,6 +333,7 @@ file governs *how to work*; the overview governs *what the system is*.
 - `README.md` — product and workspace overview.
 - `CLAUDE.md` — imports this contract; adds Claude Code specifics.
 - `docs/architecture-overview.md` — reference architecture; read before proposing any change.
+- `docs/design/README.md` — reference design for the application.
 - `docs/adrs/README.md` — index of architecture decision records.
 - `.codex/` — Codex repository-development defaults.
 - `skills/sprint/SKILL.md` — sprint state, branching, integration, and
