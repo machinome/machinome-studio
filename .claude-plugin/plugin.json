@@ -1,13 +1,13 @@
 {
-  "name": "solid-node-shop",
-  "displayName": "solid-node shop",
+  "name": "solid-node-studio",
+  "displayName": "SolidNode Studio",
   "version": "0.1.0",
-  "description": "An experimental agent shop for building 3D-printable mechanical CAD projects with solid-node: a designer, a test-first machinist, and a CAD-library librarian.",
+  "description": "SolidNode Studio builds 3D-printable mechanical CAD projects with solid-node using designer, test-first machinist, and CAD-library librarian agents.",
   "author": {
     "name": "Luis Fagundes"
   },
-  "homepage": "https://github.com/LibreSolid/solid-node",
-  "repository": "https://github.com/LibreSolid/solid-node",
+  "homepage": "https://github.com/LibreSolid/solid-node-studio",
+  "repository": "https://github.com/LibreSolid/solid-node-studio",
   "license": "Apache-2.0",
   "keywords": ["cad", "mechanical", "3d-printing", "solid-node", "cadquery", "tdd"]
 }

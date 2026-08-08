@@ -1,4 +1,4 @@
-# solid-node shop — Claude Code entry point
+# SolidNode Studio — Claude Code entry point
 
 Read [AGENTS.md](./AGENTS.md) as the shared operating contract. This file adds
 only Claude-specific dispatch guidance.

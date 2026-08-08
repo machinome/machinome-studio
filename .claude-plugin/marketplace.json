@@ -3,12 +3,12 @@
   "owner": {
     "name": "Luis Fagundes"
   },
-  "description": "Tools for building mechanical CAD projects with the solid-node framework.",
+  "description": "SolidNode Studio tools for building mechanical CAD projects with the solid-node framework.",
   "plugins": [
     {
-      "name": "solid-node-shop",
+      "name": "solid-node-studio",
       "source": "./",
-      "description": "The experimental agent shop: designer, machinist, and librarian for solid-node mechanical CAD projects."
+      "description": "SolidNode Studio: designer, machinist, and librarian agents for solid-node mechanical CAD projects."
     }
   ]
 }

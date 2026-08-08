@@ -28,7 +28,7 @@ set -euo pipefail
 
 SHOP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="$SHOP_ROOT/.venv"
-PIP="$VENV/bin/pip"
+VENV_PYTHON="$VENV/bin/python"
 FRAMEWORK_DIR="$SHOP_ROOT/solid-node"
 FRAMEWORK_REPO="${SOLID_NODE_REPO:-https://github.com/LibreSolid/solid-node.git}"
 
@@ -36,11 +36,13 @@ say() { echo "setup: $*"; }
 die() { echo "setup: $*" >&2; exit 1; }
 
 ensure_venv() {
-  if [ ! -x "$VENV/bin/python" ]; then
+  if [ ! -x "$VENV_PYTHON" ]; then
     say "creating venv at $VENV"
     python3 -m venv "$VENV"
   fi
-  "$PIP" install --quiet --upgrade pip
+  # Invoking the module through the venv interpreter survives a workspace
+  # directory rename even when generated pip entry-point shebangs are stale.
+  "$VENV_PYTHON" -m pip install --quiet --upgrade pip
 }
 
 check_system_deps() {
@@ -52,7 +54,7 @@ check_system_deps() {
 
 tier1() {
   say "tier 1 (plain): installing solid-node from PyPI"
-  "$PIP" install --upgrade solid-node rtree scipy
+  "$VENV_PYTHON" -m pip install --upgrade solid-node rtree scipy
   say "done. Activate with: source $VENV/bin/activate"
   say "upgrade to the contributor bench anytime: scripts/setup dev"
 }
@@ -84,9 +86,9 @@ tier2() {
   fi
 
   say "tier 2 (development): editable install of the working copy"
-  "$PIP" uninstall --quiet --yes solid-node 2>/dev/null || true
-  "$PIP" install --editable "$FRAMEWORK_DIR"
-  "$PIP" install rtree scipy
+  "$VENV_PYTHON" -m pip uninstall --quiet --yes solid-node 2>/dev/null || true
+  "$VENV_PYTHON" -m pip install --editable "$FRAMEWORK_DIR"
+  "$VENV_PYTHON" -m pip install rtree scipy
 
   # Frontend from source: viewer app and widget. Needs npm; without it
   # the bench still works for Python-side development, but the web
