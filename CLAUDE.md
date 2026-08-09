@@ -6,7 +6,8 @@ only Claude-specific dispatch guidance.
 For a mechanical project, the operator selects a trusted runtime profile when
 opening the floor: `builder` is direct one-agent work and `fordesmac` is the
 delegated four-agent pipeline. Runtime prompts, backend choices, and allowed
-skills are profile data under `profiles/`; do not substitute `agents/*.md`,
+skills are resolved from project configuration plus trusted profile data under
+`profiles/`; do not substitute `agents/*.md`,
 `.codex/agents/`, or repository `skills/` paths.
 
 If a host cannot launch the selected profile through the persistent backend,

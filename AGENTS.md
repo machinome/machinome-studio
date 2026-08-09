@@ -55,7 +55,9 @@ Mechanical work happens on a shop floor, and the repository agent's only part in
 it is opening that floor with the parameters the pilot chose. Read
 `skills/running-the-shop/SKILL.md` and run the one launcher command it
 documents, selecting the runtime profile explicitly (`builder` for direct work
-or `fordesmac` for the delegated pipeline) and the backend the pilot named.
+or `fordesmac` for the delegated pipeline). Per-agent backend, provider, model,
+and reasoning selections come from the project's `pyproject.toml`; the launcher
+does not accept a run-wide backend override.
 
 Once the floor is open, the profile's own agents do the work and the pilot
 steers them in the browser. The repository agent does not coordinate
@@ -341,7 +343,7 @@ file governs *how to work*; the overview governs *what the system is*.
 - `skills/framework-change/SKILL.md` — standalone or sprint-scoped framework
   proposal, ratification, implementation, integration, and cleanup.
 - `skills/running-the-shop/SKILL.md` — opening a floor: launcher command,
-  project/profile/backend parameters, and launch failures.
+  project/profile parameters, project-owned runtime selection, and launch failures.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
 - `shop-skills/` — shared runtime API and machining skills.
 - `docs/product/stories/` — pilot-authored inputs to shop OpenSpec changes.
