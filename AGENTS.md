@@ -54,10 +54,11 @@ repository discipline apply.
 Mechanical work happens on a shop floor, and the repository agent's only part in
 it is opening that floor with the parameters the pilot chose. Read
 `skills/running-the-shop/SKILL.md` and run the one launcher command it
-documents, selecting the runtime profile explicitly (`builder` for direct work
-or `fordesmac` for the delegated pipeline). Per-agent backend, provider, model,
-and reasoning selections come from the project's `pyproject.toml`; the launcher
-does not accept a run-wide backend override.
+documents. Pass `--profile` only when the pilot explicitly names an override;
+otherwise the project's `profile` declaration selects the roster, with
+`fordesmac` as the fallback. Per-agent backend, provider, model, and reasoning
+selections come from the project's `pyproject.toml`; the launcher does not
+accept a run-wide backend override.
 
 Once the floor is open, the profile's own agents do the work and the pilot
 steers them in the browser. The repository agent does not coordinate
