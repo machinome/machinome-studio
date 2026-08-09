@@ -52,13 +52,14 @@ repository discipline apply.
 ### Mechanical project work
 
 Mechanical work happens on a shop floor, and the repository agent's only part in
-it is opening that floor with the parameters the pilot chose. Read
+it is opening the project hub. Read
 `skills/running-the-shop/SKILL.md` and run the one launcher command it
-documents. Pass `--profile` only when the pilot explicitly names an override;
-otherwise the project's `profile` declaration selects the roster, with
-`fordesmac` as the fallback. Per-agent backend, provider, model, and reasoning
-selections come from the project's `pyproject.toml`; the launcher does not
-accept a run-wide backend override.
+documents. The launcher takes no project and no profile; the pilot chooses or
+creates a project in the browser. An existing project's `profile` declaration
+selects its roster, with `fordesmac` as the fallback, and creation records the
+profile the pilot chooses. Per-agent backend, provider, model, and reasoning
+selections come from the project's `pyproject.toml`; the launcher accepts no
+runtime override.
 
 Once the floor is open, the profile's own agents do the work and the pilot
 steers them in the browser. The repository agent does not coordinate
@@ -79,8 +80,9 @@ and are not repository-agent reading.
 In this workspace, every project lives at `projects/<name>/` as its own Git
 repository, untracked by the shop. A shop installed as a plugin may operate on a
 project elsewhere, but that project directory must still be its own repository
-root. The launcher enforces this before any agent starts, and the runtime agents
-re-verify it before writing; a reported open floor is evidence the gate passed.
+root. The project-open operation enforces this before any agent starts, and the
+runtime agents re-verify it before writing; a project shown as open is evidence
+the gate passed.
 
 ### Framework work
 
@@ -251,8 +253,8 @@ archives merely because the outer shop repository does not track them.
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
 plain, tier 2 development clone at `solid-node/`), the workspace venv at
 `.venv/` whose CLI is `.venv/bin/solid`, `scripts/dev-env <name> setup|teardown`
-for per-slot framework benches, and `python -m floor.orchestrator <name>` for a
-project floor. Run bench code from inside the bench so its `.env` is picked up,
+for per-slot framework benches, and `python -m floor.orchestrator` for the
+project hub. Run bench code from inside the bench so its `.env` is picked up,
 with `PYTHONPATH="$PWD"` and the workspace venv. The shop does not pin a
 framework version; that is the pilot's choice.
 
