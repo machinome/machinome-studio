@@ -54,8 +54,10 @@ repository discipline apply.
 Mechanical work happens on a shop floor, and the repository agent's only part in
 it is opening the project hub. Read
 `skills/running-the-shop/SKILL.md` and run the one launcher command it
-documents. The launcher takes no project and no profile; the pilot chooses or
-creates a project in the browser. An existing project's `profile` declaration
+documents. The launcher requires the exact external `--projects-dir` catalogue
+but takes no project and no profile; the pilot chooses or creates a project in
+the browser. It never derives runtime paths from a Git checkout or process cwd.
+An existing project's `profile` declaration
 selects its roster, with `fordesmac` as the fallback, and creation records the
 profile the pilot chooses. Per-agent backend, provider, model, and reasoning
 selections come from the project's `pyproject.toml`; the launcher accepts no
@@ -77,10 +79,11 @@ is the complete public contract and `shop-skills/solid-node/SKILL.md` is
 machining craft; both are exposed to runtime agents through profile allowlists
 and are not repository-agent reading.
 
-In this workspace, every project lives at `projects/<name>/` as its own Git
-repository, untracked by the shop. A shop installed as a plugin may operate on a
-project elsewhere, but that project directory must still be its own repository
-root. The project-open operation enforces this before any agent starts, and the
+Every project lives at `<projects-dir>/<name>/` as its own Git repository,
+untracked by the shop. In this development workspace the normal explicit
+catalogue is the primary workspace's `projects/` directory; an installed shop
+may use an arbitrary unrelated catalogue and requires no shop Git checkout.
+The project-open operation enforces the project repository boundary before any agent starts, and the
 runtime agents re-verify it before writing; a project shown as open is evidence
 the gate passed.
 
@@ -228,8 +231,11 @@ to the pilot rather than silently changing the spec.
 
 ## Workspace and repository boundaries
 
-- Resolve all relative workspace paths from the primary shop checkout; from a
-  shop worktree, locate it through Git's common directory.
+- For repository-development operations only, resolve relative workspace paths
+  from the primary shop checkout; from a shop worktree, locate it through Git's
+  common directory. This is not runtime discovery: both floor entry points use
+  the caller's required `--projects-dir`, and loaded package resources identify
+  the running shop implementation.
 - Never inspect or use sibling repositories or their executables. If an
   expected path inside this workspace is absent, stop and report it.
 
@@ -253,8 +259,9 @@ archives merely because the outer shop repository does not track them.
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
 plain, tier 2 development clone at `solid-node/`), the workspace venv at
 `.venv/` whose CLI is `.venv/bin/solid`, `scripts/dev-env <name> setup|teardown`
-for per-slot framework benches, and `python -m floor.orchestrator` for the
-project hub. Run bench code from inside the bench so its `.env` is picked up,
+for per-slot framework benches, and
+`python -m floor.orchestrator --projects-dir <path>` for the project hub. Run
+bench code from inside the bench so its `.env` is picked up,
 with `PYTHONPATH="$PWD"` and the workspace venv. The shop does not pin a
 framework version; that is the pilot's choice.
 
