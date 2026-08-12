@@ -9,7 +9,8 @@
 #                             install, frontend built from source
 #
 # Tier 1 is enough to BUILD projects with the shop: the wheel ships the
-# prebuilt viewer and widget, no toolchain needed beyond Python and
+# prebuilt viewer and widget. Both tiers build the shop's own floor
+# frontend from source, so node/npm is required alongside Python and
 # OpenSCAD. Tier 2 is the contributor bench: the framework as a working
 # copy for framework development, and the frontend
 # (viewer app + widget) built from source so it can be worked on — the
@@ -50,6 +51,19 @@ check_system_deps() {
     || say "WARNING: openscad not found on PATH — STL rendering and" \
            "snapshots will not work until it is installed"
   command -v git >/dev/null 2>&1 || die "git is required"
+}
+
+# The shop floor's browser surface is built, not committed: floor/static is
+# generated output (Vite empties and rewrites it on every build), so a fresh
+# checkout has no UI until this runs. Both tiers need it — the floor is the
+# only way to open a project.
+build_floor_frontend() {
+  command -v npm >/dev/null 2>&1 \
+    || die "npm is required to build the shop floor browser surface" \
+           "(floor/static is generated, not committed)"
+  say "building the shop floor frontend"
+  (cd "$SHOP_ROOT/floor/frontend" \
+     && npm install --no-audit --no-fund && npm run build)
 }
 
 tier1() {
@@ -112,6 +126,7 @@ tier2() {
 
 ensure_venv
 check_system_deps
+build_floor_frontend
 case "${1:-plain}" in
   plain) tier1 ;;
   dev)   tier2 "${2:-}" ;;
