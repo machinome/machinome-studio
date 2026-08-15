@@ -1,9 +1,9 @@
-# SolidNode Studio: agent operating contract
+# LibreSolid Studio: agent operating contract
 
 This repository is the development entry point for the solid-node
 ecosystem. It is both:
 
-1. the source of the experimental `solid-node-studio` agent harness; and
+1. the source of the experimental `libresolid-studio` agent harness; and
 2. a workspace in which the solid-node framework and independent
    mechanical projects are developed.
 
@@ -15,7 +15,7 @@ unrelated process.
 
 - `solid-node` is functional and is approaching its broadly usable v0.4
   release. Framework changes must preserve that level of usefulness.
-- `solid-node-studio` is private and experimental. Its roles, prompts, and
+- `libresolid-studio` is private and experimental. Its roles, prompts, and
   development disciplines are being exercised and revised before release.
 - The public community-contribution workflow described by the shop is the
   intended direction, not a claim that it is already published or stable.
@@ -241,7 +241,7 @@ to the pilot rather than silently changing the spec.
 
 The normal workspace layout is:
 
-    solid-node-studio/        this repository: the harness
+    libresolid-studio/        this repository: the harness
     solid-node/             ignored independent framework repository
     solid-node/WTs/<name>/  ignored framework worktrees
     WTs/<name>/             ignored shop worktrees

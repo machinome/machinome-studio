@@ -1,13 +1,13 @@
 {
-  "name": "solid-node-studio",
-  "displayName": "SolidNode Studio",
+  "name": "libresolid-studio",
+  "displayName": "LibreSolid Studio",
   "version": "0.1.0",
-  "description": "SolidNode Studio builds 3D-printable mechanical CAD projects with solid-node using designer, test-first machinist, and CAD-library librarian agents.",
+  "description": "LibreSolid Studio builds 3D-printable mechanical CAD projects with solid-node using designer, test-first machinist, and CAD-library librarian agents.",
   "author": {
     "name": "Luis Fagundes"
   },
-  "homepage": "https://github.com/LibreSolid/solid-node-studio",
-  "repository": "https://github.com/LibreSolid/solid-node-studio",
+  "homepage": "https://github.com/LibreSolid/libresolid-studio",
+  "repository": "https://github.com/LibreSolid/libresolid-studio",
   "license": "Apache-2.0",
   "keywords": ["cad", "mechanical", "3d-printing", "solid-node", "cadquery", "tdd"]
 }
