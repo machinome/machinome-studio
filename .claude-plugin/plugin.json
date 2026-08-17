@@ -8,6 +8,6 @@
   },
   "homepage": "https://github.com/LibreSolid/libresolid-studio",
   "repository": "https://github.com/LibreSolid/libresolid-studio",
-  "license": "Apache-2.0",
+  "license": "AGPL-3.0-only",
   "keywords": ["cad", "mechanical", "3d-printing", "solid-node", "cadquery", "tdd"]
 }
