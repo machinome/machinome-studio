@@ -22,6 +22,12 @@ unrelated process.
   At present the framework author is the only active framework developer and
   may explicitly choose a simpler direct-commit/direct-push path while the
   harness is being bootstrapped.
+- The studio concept is proven, but its packaging is limited: it runs on
+  Linux against Claude Code or opencode backends and is still hacky to set
+  up. Delivering the studio experience to an average maker in the browser,
+  on their existing assistant subscription, is under active exploration in
+  three independent prototype repositories (see "Browser delivery
+  prototypes"). No delivery architecture has been chosen.
 - An agent never infers permission to push, publish, open a PR, or contact a
   contributor. Do so only when the pilot explicitly asks.
 
@@ -158,6 +164,44 @@ work. Do not place an unrelated adjustment on a sprint branch merely because
 checkout, make the focused change and commit there instead of creating a shop
 or sprint worktree.
 
+### Browser delivery prototypes
+
+`browser-engine/`, `mcp-server/`, and `browser-plugin/` are three ignored,
+independent Git repositories prototyping browser delivery of the studio
+experience: a maker chatting with a web assistant (claude.ai first; others
+intended) installs a browser extension, the studio opens in a side panel next
+to the conversation, and the assistant reaches the studio over MCP — no local
+install, no API key, just the maker's existing assistant subscription. Two
+candidate architectures are being evaluated and neither is chosen: render all
+CAD in Python inside the MCP server, or pack the solid-node stack into the
+browser with WebAssembly. That choice is the pilot's; prototype findings are
+evidence for it, not requirements.
+
+Each repository is a concept-proving spike:
+
+- `browser-engine/` — CAD evaluation in the browser. Proved that CadQuery
+  builds correct geometry in headless Chromium via Pyodide/WebAssembly, with
+  volume matching native CadQuery; peak memory on mid-range hardware and a
+  non-Chromium browser matrix remain unmeasured. Carries its own OpenSpec
+  records under `browser-engine/openspec/`.
+- `mcp-server/` — the MCP server. Proved a hello-world interactive widget
+  over MCP Apps (SEP-1865), but that route looks like a dead end for the
+  studio panel: Apps rendering on Claude web custom connectors is unreliable,
+  and an in-transcript widget is not the docked studio surface. The browser
+  plugin is the current direction for the panel; the server remains the MCP
+  transport the assistant talks to.
+- `browser-plugin/` — the browser extension. Proved a side panel that opens
+  beside claude.ai in Chrome and Firefox and stays sticky to the tabs the
+  user opted in.
+
+Each prototype is its own product with its own history, README, and process;
+work on one happens inside that repository, not through the shop's worktree
+or sprint machinery, and is never staged in the shop repository. They depend
+on nothing else in this workspace and nothing in the shop depends on them.
+Read each repository's `README.md` before working there, and keep its status
+claims as honest as this file's: proven means proven for the recorded
+environment, with the recorded gaps.
+
 ### CAD library catalogue
 
 `library/` is the shop's durable, evidence-backed catalogue of external reuse
@@ -246,11 +290,15 @@ The normal workspace layout is:
     solid-node/WTs/<name>/  ignored framework worktrees
     WTs/<name>/             ignored shop worktrees
     projects/<name>/        ignored independent project repositories
+    browser-engine/         ignored independent browser-delivery prototype
+    mcp-server/             ignored independent browser-delivery prototype
+    browser-plugin/         ignored independent browser-delivery prototype
 
 Repository membership, not directory nesting, defines ownership. Before every
 commit, run `git rev-parse --show-toplevel` in the target and confirm it is the
 repository intended for that change. Never stage the ignored framework clone,
-a project, generated CAD artifacts, or a worktree in the shop repository.
+a project, a browser-delivery prototype, generated CAD artifacts, or a
+worktree in the shop repository.
 
 Preserve pre-existing dirty state and unrelated user files. In particular,
 do not delete or absorb ignored projects, framework checkouts, worktrees, or
@@ -361,3 +409,6 @@ file governs *how to work*; the overview governs *what the system is*.
 - `scripts/dev-env` — isolated framework worktree benches.
 - `governance/` — proposed public contribution templates; experimental until
   the contribution workflow is published.
+- `browser-engine/README.md`, `mcp-server/README.md`,
+  `browser-plugin/README.md` — independent browser-delivery prototype
+  repositories; see "Browser delivery prototypes".
