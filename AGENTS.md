@@ -15,6 +15,11 @@ unrelated process.
 
 - `solid-node` is functional and is approaching its broadly usable v0.4
   release. Framework changes must preserve that level of usefulness.
+- `molejo`, the analytic flexible-parts library born from a solid-node
+  flexible-leaf finding, is released and public: 0.1.0 on PyPI and on npm,
+  with its manual at <https://molejo.readthedocs.io>. It is the one part of
+  this workspace that is genuinely published, and its claims are held to
+  that standard (see "molejo library work").
 - `libresolid-studio` is private and experimental. Its roles, prompts, and
   development disciplines are being exercised and revised before release.
 - The public community-contribution workflow described by the shop is the
@@ -164,6 +169,41 @@ work. Do not place an unrelated adjustment on a sprint branch merely because
 checkout, make the focused change and commit there instead of creating a shop
 or sprint worktree.
 
+### molejo library work
+
+`molejo/` is an ignored, independent Git repository
+(<https://github.com/LibreSolid/molejo>) holding molejo: an analytic
+representation for the flexible parts of a machine — valve springs, timing
+belts, cable looms, filament — parts whose shape is a function of machine
+state rather than only of their placement. A molejo shape is a serializable
+spec; the Python package authors and evaluates it to meshes, STL, and
+optionally exact OCCT solids, and the JavaScript package evaluates the same
+spec to three.js buffers at frame rate, the two pinned to each other by
+shared parity fixtures.
+
+molejo was born from a solid-node flexible-leaf finding and is the
+flexible-part technology solid-node adapts, but it is its own product:
+independently consumable by any Python or three.js project, and depending on
+nothing else in this workspace. Do not treat it as part of the framework, and
+do not fold a molejo change into a framework cycle.
+
+Unlike everything else here, molejo is released: version 0.1.0 implementing
+spec version 1, on PyPI and on npm, with the manual at
+<https://molejo.readthedocs.io>. Both packages carry the spec version they
+implement and release together for it; neither runtime is ever published
+against a spec version the other has not caught up to. Publishing is the
+pilot's explicit decision and never a side effect of building —
+`molejo/scripts/check-dist` packs each package, installs it into a throwaway
+environment outside the repository and evaluates a fixture there, and uploads
+nothing.
+
+Work on molejo happens inside that repository, under its own history, README,
+changelog, and OpenSpec records at `molejo/openspec/` — not through the shop's
+worktree or sprint machinery, and never staged in the shop repository. Read
+`molejo/README.md` and `molejo/CHANGELOG.md` before working there, and keep
+their status claims as honest as this file's: a released capability is one the
+published version actually has, with the recorded gaps.
+
 ### Browser delivery prototypes
 
 `browser-engine/`, `mcp-server/`, and `browser-plugin/` are three ignored,
@@ -290,6 +330,7 @@ The normal workspace layout is:
     solid-node/WTs/<name>/  ignored framework worktrees
     WTs/<name>/             ignored shop worktrees
     projects/<name>/        ignored independent project repositories
+    molejo/                 ignored independent published library repository
     browser-engine/         ignored independent browser-delivery prototype
     mcp-server/             ignored independent browser-delivery prototype
     browser-plugin/         ignored independent browser-delivery prototype
@@ -297,12 +338,13 @@ The normal workspace layout is:
 Repository membership, not directory nesting, defines ownership. Before every
 commit, run `git rev-parse --show-toplevel` in the target and confirm it is the
 repository intended for that change. Never stage the ignored framework clone,
-a project, a browser-delivery prototype, generated CAD artifacts, or a
-worktree in the shop repository.
+a project, the molejo repository, a browser-delivery prototype, generated CAD
+artifacts, or a worktree in the shop repository.
 
 Preserve pre-existing dirty state and unrelated user files. In particular,
-do not delete or absorb ignored projects, framework checkouts, worktrees, or
-archives merely because the outer shop repository does not track them.
+do not delete or absorb ignored projects, framework checkouts, the molejo
+repository, browser-delivery prototypes, worktrees, or archives merely because
+the outer shop repository does not track them.
 
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
 plain, tier 2 development clone at `solid-node/`), the workspace venv at
@@ -409,6 +451,8 @@ file governs *how to work*; the overview governs *what the system is*.
 - `scripts/dev-env` — isolated framework worktree benches.
 - `governance/` — proposed public contribution templates; experimental until
   the contribution workflow is published.
+- `molejo/README.md` — independent published library repository for analytic
+  flexible parts; see "molejo library work".
 - `browser-engine/README.md`, `mcp-server/README.md`,
   `browser-plugin/README.md` — independent browser-delivery prototype
   repositories; see "Browser delivery prototypes".
