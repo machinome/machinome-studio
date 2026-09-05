@@ -20,6 +20,13 @@ unrelated process.
   with its manual at <https://molejo.readthedocs.io>. It is the one part of
   this workspace that is genuinely published, and its claims are held to
   that standard (see "molejo library work").
+- `solid-node-viewer`, the browser viewer for solid-node models, has just
+  left the framework to become an independent AGPL-3.0-only repository and
+  package, installed through the framework's `viewer` extra and reached only
+  as a separate process. Version 0.1.0 is founded but not yet published on
+  any index or pushed to its remote; the framework, this shop and its own
+  records already describe it as the viewer's home (see "solid-node-viewer
+  work"). Do not describe it as released.
 - `libresolid-studio` is private and experimental. Its roles, prompts, and
   development disciplines are being exercised and revised before release.
 - The public community-contribution workflow described by the shop is the
@@ -135,6 +142,13 @@ tests, OpenSpec records, architecture, and ADRs—not agent prompts.
 Framework commits belong only to a solid-node repository or one of its
 worktrees. Mechanical-project commits never do.
 
+The browser viewer is not framework source. solid-node is Apache-2.0 and
+complete without it: `solid develop` opens OpenSCAD when the viewer package
+is absent, and the commands that need the browser viewer name the `viewer`
+extra. A framework change that needs the viewer to change is two changes in
+two repositories, and nothing of the viewer's code may be moved into the
+framework; see "solid-node-viewer work".
+
 ### Shop work
 
 Changes to role cards, skills, plugin metadata, workspace scripts, and
@@ -203,6 +217,36 @@ worktree or sprint machinery, and never staged in the shop repository. Read
 `molejo/README.md` and `molejo/CHANGELOG.md` before working there, and keep
 their status claims as honest as this file's: a released capability is one the
 published version actually has, with the recorded gaps.
+
+### solid-node-viewer work
+
+`solid-node-viewer/` is an ignored, independent Git repository
+(<https://github.com/LibreSolid/solid-node-viewer>) holding the browser
+viewer for solid-node models: the embeddable three.js widget with its
+driver controls and molejo evaluation, the standalone export page, the
+development server `solid develop` launches, and the headless capture behind
+`solid snapshot --renderer web`. It is licensed AGPL-3.0-only, where the
+framework is Apache-2.0, and that difference is why it is a separate
+package: the framework installs it as its optional `viewer` extra, finds it
+through one entry point, and runs it as a separate process; neither package
+imports the other. The shop floor serves the bundle that package carries,
+still obtained through the framework's `solid viewer` report.
+
+The viewer is the framework's viewer and nothing else's dependency, but it
+is its own product with its own history, README, changelog, OpenSpec records
+at `solid-node-viewer/openspec/` and decision log at
+`solid-node-viewer/docs/adrs/` (the viewer-owned ADRs relocated from the
+framework under their original numbers). Work on it happens inside that
+repository — not through the shop's worktree or sprint machinery, never
+staged in the shop repository, and never folded into a framework cycle. A
+change that spans both packages is one change in each, and the contract
+between them — the `solid_node.viewer` entry point and the
+`solid-node-viewer describe|serve|capture` commands — is specified on both
+sides. Read `solid-node-viewer/README.md` and `solid-node-viewer/CHANGELOG.md`
+before working there, and keep their status claims honest: 0.1.0 is
+founded, not released; `scripts/check-dist` there builds and smokes the
+distributions and uploads nothing, and publishing is the pilot's explicit
+decision.
 
 ### Browser delivery prototypes
 
@@ -331,6 +375,7 @@ The normal workspace layout is:
     WTs/<name>/             ignored shop worktrees
     projects/<name>/        ignored independent project repositories
     molejo/                 ignored independent published library repository
+    solid-node-viewer/      ignored independent viewer repository (AGPL)
     browser-engine/         ignored independent browser-delivery prototype
     mcp-server/             ignored independent browser-delivery prototype
     browser-plugin/         ignored independent browser-delivery prototype
@@ -338,16 +383,17 @@ The normal workspace layout is:
 Repository membership, not directory nesting, defines ownership. Before every
 commit, run `git rev-parse --show-toplevel` in the target and confirm it is the
 repository intended for that change. Never stage the ignored framework clone,
-a project, the molejo repository, a browser-delivery prototype, generated CAD
-artifacts, or a worktree in the shop repository.
+a project, the molejo repository, the viewer repository, a browser-delivery
+prototype, generated CAD artifacts, or a worktree in the shop repository.
 
 Preserve pre-existing dirty state and unrelated user files. In particular,
 do not delete or absorb ignored projects, framework checkouts, the molejo
-repository, browser-delivery prototypes, worktrees, or archives merely because
-the outer shop repository does not track them.
+repository, the viewer repository, browser-delivery prototypes, worktrees, or
+archives merely because the outer shop repository does not track them.
 
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
-plain, tier 2 development clone at `solid-node/`), the workspace venv at
+plain, installing `solid-node[viewer]`; tier 2 development clones at
+`solid-node/` and `solid-node-viewer/`), the workspace venv at
 `.venv/` whose CLI is `.venv/bin/solid`, `scripts/dev-env <name> setup|teardown`
 for per-slot framework benches, and
 `python -m floor.orchestrator --projects-dir <path>` for the project hub. Run
@@ -453,6 +499,8 @@ file governs *how to work*; the overview governs *what the system is*.
   the contribution workflow is published.
 - `molejo/README.md` — independent published library repository for analytic
   flexible parts; see "molejo library work".
+- `solid-node-viewer/README.md` — independent AGPL viewer repository, the
+  framework's `viewer` extra; see "solid-node-viewer work".
 - `browser-engine/README.md`, `mcp-server/README.md`,
   `browser-plugin/README.md` — independent browser-delivery prototype
   repositories; see "Browser delivery prototypes".
