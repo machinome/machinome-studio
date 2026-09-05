@@ -13,13 +13,15 @@ unrelated process.
 
 ## Current status
 
-- `solid-node` is functional and is approaching its broadly usable v0.4
-  release. Framework changes must preserve that level of usefulness.
+- `solid-node` is released: 0.6.0 on PyPI (1 September 2026), the release
+  that makes a model a machine. Its main branch has moved on since, the
+  declarative node API among the merged changes, none of it pushed or
+  released. Framework changes must preserve that level of usefulness.
 - `molejo`, the analytic flexible-parts library born from a solid-node
-  flexible-leaf finding, is released and public: 0.1.0 on PyPI and on npm,
-  with its manual at <https://molejo.readthedocs.io>. It is the one part of
-  this workspace that is genuinely published, and its claims are held to
-  that standard (see "molejo library work").
+  flexible-leaf finding, is released and public: 0.2.0 on PyPI and on npm,
+  with its manual at <https://molejo.readthedocs.io>. Like the framework it
+  is genuinely published, and its claims are held to that standard (see
+  "molejo library work").
 - `solid-node-viewer`, the browser viewer for solid-node models, has just
   left the framework to become an independent AGPL-3.0-only repository and
   package, installed through the framework's `viewer` extra and reached only
@@ -201,8 +203,8 @@ independently consumable by any Python or three.js project, and depending on
 nothing else in this workspace. Do not treat it as part of the framework, and
 do not fold a molejo change into a framework cycle.
 
-Unlike everything else here, molejo is released: version 0.1.0 implementing
-spec version 1, on PyPI and on npm, with the manual at
+Like solid-node, molejo is released: version 0.2.0 implementing spec
+version `"0.2"`, on PyPI and on npm, with the manual at
 <https://molejo.readthedocs.io>. Both packages carry the spec version they
 implement and release together for it; neither runtime is ever published
 against a spec version the other has not caught up to. Publishing is the
