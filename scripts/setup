@@ -5,7 +5,8 @@
 # setup — bootstrap the shop workspace, in one of two tiers.
 #
 #   scripts/setup             tier 1 (plain): venv + pip install
-#                             "solid-node[viewer]"
+#                             "solid-node[viewer]" and the viewer's
+#                             [snapshot] extra with its Chromium
 #   scripts/setup dev [ref]   tier 2 (development): the framework AND the
 #                             viewer as git working copies (the framework
 #                             at its latest release tag by default, or the
@@ -91,9 +92,25 @@ build_floor_frontend() {
      && npm install --no-audit --no-fund && npm run build)
 }
 
+# The shop photographs every project it opens through
+# `solid snapshot --renderer web`, so the hub's model previews need the
+# viewer's headless capture: Playwright, which the [snapshot] extra installs,
+# and the Chromium build that exact Playwright expects. Without both, every
+# preview render fails and the hub shows projects without a picture.
+ensure_snapshot_browser() {
+  say "downloading the Chromium build the snapshot renderer needs"
+  "$VENV_PYTHON" -m playwright install chromium || {
+    say "WARNING: could not download Chromium — hub model previews will not"
+    say "         render until you run: $VENV_PYTHON -m playwright install chromium"
+    return 0
+  }
+}
+
 tier1() {
   say "tier 1 (plain): installing solid-node with its browser viewer from PyPI"
   "$VENV_PYTHON" -m pip install --upgrade "solid-node[viewer]" rtree scipy
+  "$VENV_PYTHON" -m pip install --upgrade "solid-node-viewer[snapshot]"
+  ensure_snapshot_browser
   say "done. Activate with: source $VENV/bin/activate"
   say "upgrade to the contributor bench anytime: scripts/setup dev"
 }
@@ -141,7 +158,8 @@ tier2() {
   fi
   say "editable install of the viewer working copy"
   "$VENV_PYTHON" -m pip uninstall --quiet --yes solid-node-viewer 2>/dev/null || true
-  "$VENV_PYTHON" -m pip install --editable "$VIEWER_DIR"
+  "$VENV_PYTHON" -m pip install --editable "$VIEWER_DIR[snapshot]"
+  ensure_snapshot_browser
 
   # The viewer's frontends from source: the widget and the development app.
   # Needs npm; without it the bench still works for Python-side development,
