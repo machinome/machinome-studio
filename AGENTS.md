@@ -111,7 +111,11 @@ history. The craft and the evidence discipline are the same in both lanes:
 `shop-skills/solid-node/SKILL.md` is machining craft, exposed to runtime agents
 through profile allowlists and read by the repository agent when it machines a
 project directly. Pixels remain evidence, tests still prove the failure red
-first, and the pilot remains the design authority.
+first, and the pilot remains the design authority. Giving an existing
+open-source project a simulation layer is the recurring shape of this work,
+and `skills/simulate-project/SKILL.md` is its procedure: the thin
+`simulation/` package, the control surface sized to the machine, the small
+demo set, and the project-owned OpenSpec record.
 
 Direct project work is not shop work: nothing about a project is staged or
 committed in the shop repository, and the shop's worktree, sprint, and OpenSpec
@@ -515,6 +519,8 @@ file governs *how to work*; the overview governs *what the system is*.
   proposal, ratification, implementation, integration, and cleanup.
 - `skills/running-the-shop/SKILL.md` — opening a floor: launcher command,
   project/profile parameters, project-owned runtime selection, and launch failures.
+- `skills/simulate-project/SKILL.md` — adding a solid-node simulation layer
+  to an existing open-source project directly from this conversation.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
 - `shop-skills/` — shared solid-node API and machining skills: allowlisted to
   runtime agents, and read here when a project is built directly.
