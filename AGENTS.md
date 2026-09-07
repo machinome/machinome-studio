@@ -52,9 +52,10 @@ experimental capability as already portable or released.
 
 solid-node is meant to evolve empirically from real mechanical work. A
 framework requirement should normally begin as evidence from a project:
-something a project needs, a workaround its agent had to learn, a contract the
-framework cannot express, or a failure in an existing promise. The agents
-working on that project carry the context needed to explain the requirement.
+something a project needs, a workaround its builder had to learn, a contract
+the framework cannot express, or a failure in an existing promise. Whoever
+worked that project — a floor agent or this conversation — carries the context
+needed to explain the requirement.
 
 The intended chain is:
 
@@ -64,24 +65,30 @@ The intended chain is:
 This keeps framework design emergent and accountable to users rather than
 invented in isolation. Explicit maintainer work such as release engineering,
 maintenance, or a known conformance bug may start without a new project
-finding, but it still starts through the shop so the same evidence and
+finding, but it still starts in this repository so the same evidence and
 repository discipline apply.
 
 ## Start every task in the right lane
 
 ### Mechanical project work
 
-Mechanical work happens on a shop floor, and the repository agent's only part in
-it is opening the project hub. Read
-`skills/running-the-shop/SKILL.md` and run the one launcher command it
-documents. The launcher requires the exact external `--projects-dir` catalogue
-but takes no project and no profile; the pilot chooses or creates a project in
-the browser. It never derives runtime paths from a Git checkout or process cwd.
-An existing project's `profile` declaration
-selects its roster, with `fordesmac` as the fallback, and creation records the
-profile the pilot chooses. Per-agent backend, provider, model, and reasoning
-selections come from the project's `pyproject.toml`; the launcher accepts no
-runtime override.
+Mechanical work happens in one of two lanes, and the pilot chooses by where
+they ask. Asked on the shop floor, the work belongs to that project's profile
+agents. Asked here, the repository agent does it directly in the project's own
+repository. Neither lane is a fallback for the other: a failed launch is not
+permission to imitate the floor in conversation, and direct work is not a
+reason to leave the floor unopened when the pilot asked for it.
+
+**On the shop floor.** When the pilot asks for the shop, the repository agent's
+only part is opening the project hub. Read `skills/running-the-shop/SKILL.md`
+and run the one launcher command it documents. The launcher requires the exact
+external `--projects-dir` catalogue but takes no project and no profile; the
+pilot chooses or creates a project in the browser. It never derives runtime
+paths from a Git checkout or process cwd. An existing project's `profile`
+declaration selects its roster, with `fordesmac` as the fallback, and creation
+records the profile the pilot chooses. Per-agent backend, provider, model, and
+reasoning selections come from the project's `pyproject.toml`; the launcher
+accepts no runtime override.
 
 Once the floor is open, the profile's own agents do the work and the pilot
 steers them in the browser. The repository agent does not coordinate
@@ -94,23 +101,39 @@ Runtime conduct is profile-owned and stated in each role's prompt under
 `profiles/`, not here: the designer's document ownership and drawing-release
 protocol, the machinist's evidence and commit discipline, the foreman's
 dispatch and one-increment-ahead pipeline, and the provisional rule keeping
-every runtime agent inside its active project. `shop-skills/solid-node-api/SKILL.md`
-is the complete public contract and `shop-skills/solid-node/SKILL.md` is
-machining craft; both are exposed to runtime agents through profile allowlists
-and are not repository-agent reading.
+every runtime agent inside its active project.
+
+**Directly from this conversation.** When the pilot asks for project work here,
+do it. Design, model, test, inspect, and commit inside that project's own Git
+repository, under the project's own records — its design documents, specs, and
+history. The craft and the evidence discipline are the same in both lanes:
+`shop-skills/solid-node-api/SKILL.md` is the complete public contract and
+`shop-skills/solid-node/SKILL.md` is machining craft, exposed to runtime agents
+through profile allowlists and read by the repository agent when it machines a
+project directly. Pixels remain evidence, tests still prove the failure red
+first, and the pilot remains the design authority.
+
+Direct project work is not shop work: nothing about a project is staged or
+committed in the shop repository, and the shop's worktree, sprint, and OpenSpec
+machinery does not govern it. A project may keep its own OpenSpec records under
+its own repository when the pilot wants them. An empirical finding is worth the
+same whichever lane produced it, and still becomes a framework requirement
+through `skills/framework-change/SKILL.md`.
 
 Every project lives at `<projects-dir>/<name>/` as its own Git repository,
 untracked by the shop. In this development workspace the normal explicit
 catalogue is the primary workspace's `projects/` directory; an installed shop
 may use an arbitrary unrelated catalogue and requires no shop Git checkout.
-The project-open operation enforces the project repository boundary before any agent starts, and the
-runtime agents re-verify it before writing; a project shown as open is evidence
-the gate passed.
+The project-open operation enforces the project repository boundary before any
+agent starts, and the runtime agents re-verify it before writing; a project
+shown as open is evidence the gate passed. Working directly, the repository
+agent is its own gate: confirm `git rev-parse --show-toplevel` names that
+project before writing or committing.
 
 ### Framework work
 
 Framework development also starts in this repository, normally from an
-empirical finding surfaced by a project agent, but it is a separate discipline
+empirical finding surfaced by project work, but it is a separate discipline
 from running the mechanical shop. Read `skills/framework-change/SKILL.md`
 first for every framework mutation. Do not dispatch mechanical-project roles
 to design or implement framework changes. Read the target framework checkout's
@@ -493,7 +516,8 @@ file governs *how to work*; the overview governs *what the system is*.
 - `skills/running-the-shop/SKILL.md` — opening a floor: launcher command,
   project/profile parameters, project-owned runtime selection, and launch failures.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
-- `shop-skills/` — shared runtime API and machining skills.
+- `shop-skills/` — shared solid-node API and machining skills: allowlisted to
+  runtime agents, and read here when a project is built directly.
 - `docs/product/stories/` — pilot-authored inputs to shop OpenSpec changes.
 - `scripts/setup` — plain or development workspace bootstrap.
 - `scripts/dev-env` — isolated framework worktree benches.
