@@ -156,6 +156,19 @@ Framework work may inspect framework source because changing the framework is
 its assignment. Keep the originating project, reproduction, or contract named
 in the change so the requirement does not lose its empirical context.
 
+Not every piece of framework thinking is an OpenSpec artifact. The framework
+repository's `workflow/` directory is its pre-spec working record: `warts.md`
+is the running log of findings and their ratified triage, `workflow/docs/`
+holds the provisional plan a change is later cut from, and `workflow/archive/`
+keeps finished campaigns — audits, due diligences, remediation programmes —
+with their reports and raw evidence. Record a finding there when a project
+produces one, and work a plan out there before proposing, so a settled
+direction does not live only in a conversation. Read
+`solid-node/workflow/README.md` for its conventions. Nothing in `workflow/` is
+ratified: it is evidence and intent, never authority over a baseline spec or an
+accepted ADR, and it is framework material committed to the framework
+repository, never staged in the shop.
+
 OpenSpec changes, ratification, implementation, and archival are repository
 workflows performed directly under the pilot's authority. During the current
 private bootstrap, follow the pilot's explicit direction about which portions
@@ -531,6 +544,8 @@ file governs *how to work*; the overview governs *what the system is*.
   the contribution workflow is published.
 - `molejo/README.md` — independent published library repository for analytic
   flexible parts; see "molejo library work".
+- `solid-node/workflow/README.md` — the framework's pre-spec working record:
+  findings (`warts.md`), provisional plans, and archived campaigns.
 - `solid-node-viewer/README.md` — independent AGPL viewer repository, the
   framework's `viewer` extra; see "solid-node-viewer work".
 - `browser-engine/README.md`, `mcp-server/README.md`,
