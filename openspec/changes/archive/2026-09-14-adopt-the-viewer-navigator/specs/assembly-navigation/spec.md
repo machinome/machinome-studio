@@ -1,10 +1,5 @@
-# Assembly Navigation Specification
+## ADDED Requirements
 
-## Purpose
-
-Let a maker inspect the model hierarchy and control the current viewer's focus
-and subtree visibility without changing the CAD project or its build artifacts.
-## Requirements
 ### Requirement: The Model panel presents the viewer's navigator
 When the workspace has a mounted functional model, the Model panel SHALL
 present the assembly navigator the installed browser viewer package mounts over
@@ -77,3 +72,25 @@ moment, whichever gesture or update moved it.
 - **WHEN** the maker focuses a subtree and hides a part
 - **THEN** the project's source and published build artifacts are unchanged
 
+## REMOVED Requirements
+
+### Requirement: The Model panel provides an interactive assembly navigator
+**Reason**: The browser viewer package now mounts its own assembly navigator
+into any host element, carrying this behaviour — tree roles, labels, effective
+colours, focused root, hidden subtrees, checkbox visibility semantics with
+colour chips and a neutral fill, and the keyboard contract — as its own
+specified capability. Restating it here made the shop a second authority for
+behaviour it no longer implements.
+
+**Migration**: The Model panel mounts that navigator instead; the behaviour is
+specified by the viewer package's assembly-navigation capability and is
+required of the installed viewer by `functional-model-inspection`.
+
+### Requirement: Assembly navigation is session-local and reconciles on viewer updates
+**Reason**: The shop no longer holds selection, focus, visibility, or expansion
+state to reconcile; the viewer owns its navigation state and republishes it to
+the navigator on every accepted change.
+
+**Migration**: Replaced by "The Model panel reflects the viewer after an
+update", which keeps the session-local and project-untouched guarantees and
+drops the shop-side reconciliation.
