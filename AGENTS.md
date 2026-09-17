@@ -68,6 +68,21 @@ maintenance, or a known conformance bug may start without a new project
 finding, but it still starts in this repository so the same evidence and
 repository discipline apply.
 
+**Every feature needs empirical evidence.** A feature, a spelling, a new
+declaration, a document field, or a viewer capability is proposed only when
+a named project needs it now, and the proposal names the project, the finding
+and what the project does with the result. Nothing is built for a use nobody
+has: not to complete a table whose squares look asymmetric, not to make a
+decomposition "honest", not for a machine someone might write later, not
+because a plan listed it. Design symmetry is not evidence and a plan is not
+evidence; a campaign plan inherited from an earlier agent is re-checked cycle
+by cycle, and a cycle with no originating finding is struck before it is
+proposed, not executed because it was ordered. A change whose own record says
+the originating project "is owed nothing, and gets nothing" is the shape this
+rule forbids. If a genuine requirement seems to need speculative groundwork,
+bring the pilot the requirement and the smallest change that serves it, and
+let the pilot decide whether the groundwork is wanted.
+
 ## Start every task in the right lane
 
 ### Mechanical project work
