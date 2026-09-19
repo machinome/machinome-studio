@@ -1,35 +1,35 @@
-# LibreSolid Studio: agent operating contract
+# Machinome Studio: agent operating contract
 
-This repository is the development entry point for the solid-node
+This repository is the development entry point for the machinome
 ecosystem. It is both:
 
-1. the source of the experimental `libresolid-studio` agent harness; and
-2. a workspace in which the solid-node framework and independent
+1. the source of the experimental `machinome-studio` agent harness; and
+2. a workspace in which the machinome framework and independent
    mechanical projects are developed.
 
 The shop is the harness for both kinds of work. Do not treat a checkout of
-the solid-node framework as a separate development environment with its own
+the machinome framework as a separate development environment with its own
 unrelated process.
 
 ## Current status
 
-- `solid-node` is released: 0.6.0 on PyPI (1 September 2026), the release
+- `machinome` is released: 0.6.0 on PyPI (1 September 2026), the release
   that makes a model a machine. Its main branch has moved on since, the
   declarative node API among the merged changes, none of it pushed or
   released. Framework changes must preserve that level of usefulness.
-- `molejo`, the analytic flexible-parts library born from a solid-node
+- `molejo`, the analytic flexible-parts library born from a machinome
   flexible-leaf finding, is released and public: 0.2.0 on PyPI and on npm,
   with its manual at <https://molejo.readthedocs.io>. Like the framework it
   is genuinely published, and its claims are held to that standard (see
   "molejo library work").
-- `solid-node-viewer`, the browser viewer for solid-node models, has just
+- `machinome-viewer`, the browser viewer for machinome models, has just
   left the framework to become an independent AGPL-3.0-only repository and
   package, installed through the framework's `viewer` extra and reached only
   as a separate process. Version 0.1.0 is founded but not yet published on
   any index or pushed to its remote; the framework, this shop and its own
-  records already describe it as the viewer's home (see "solid-node-viewer
+  records already describe it as the viewer's home (see "machinome-viewer
   work"). Do not describe it as released.
-- `libresolid-studio` is private and experimental. Its roles, prompts, and
+- `machinome-studio` is private and experimental. Its roles, prompts, and
   development disciplines are being exercised and revised before release.
 - The public community-contribution workflow described by the shop is the
   intended direction, not a claim that it is already published or stable.
@@ -50,7 +50,7 @@ experimental capability as already portable or released.
 
 ## Why development starts here
 
-solid-node is meant to evolve empirically from real mechanical work. A
+machinome is meant to evolve empirically from real mechanical work. A
 framework requirement should normally begin as evidence from a project:
 something a project needs, a workaround its builder had to learn, a contract
 the framework cannot express, or a failure in an existing promise. Whoever
@@ -122,8 +122,8 @@ every runtime agent inside its active project.
 do it. Design, model, test, inspect, and commit inside that project's own Git
 repository, under the project's own records — its design documents, specs, and
 history. The craft and the evidence discipline are the same in both lanes:
-`shop-skills/solid-node-api/SKILL.md` is the complete public contract and
-`shop-skills/solid-node/SKILL.md` is machining craft, exposed to runtime agents
+`shop-skills/machinome-api/SKILL.md` is the complete public contract and
+`shop-skills/machinome/SKILL.md` is machining craft, exposed to runtime agents
 through profile allowlists and read by the repository agent when it machines a
 project directly. Pixels remain evidence, tests still prove the failure red
 first, and the pilot remains the design authority. Giving an existing
@@ -158,8 +158,8 @@ first for every framework mutation. Do not dispatch mechanical-project roles
 to design or implement framework changes. Read the target framework checkout's
 architecture, baseline specs, and relevant decisions before work.
 
-Use an isolated framework worktree at `./solid-node/WTs/<name>/`; never make
-framework changes in the primary `./solid-node/` checkout.
+Use an isolated framework worktree at `./machinome-framework/WTs/<name>/`; never make
+framework changes in the primary `./machinome-framework/` checkout.
 
 Framework cycles are standalone by default. A framework cycle belongs to an
 active sprint only when the pilot explicitly includes it in that sprint's
@@ -179,7 +179,7 @@ keeps finished campaigns — audits, due diligences, remediation programmes —
 with their reports and raw evidence. Record a finding there when a project
 produces one, and work a plan out there before proposing, so a settled
 direction does not live only in a conversation. Read
-`solid-node/workflow/README.md` for its conventions. Nothing in `workflow/` is
+`machinome-framework/workflow/README.md` for its conventions. Nothing in `workflow/` is
 ratified: it is evidence and intent, never authority over a baseline spec or an
 accepted ADR, and it is framework material committed to the framework
 repository, never staged in the shop.
@@ -196,15 +196,15 @@ Never read or rely on a framework-local `AGENTS.md`, assistant command, or
 copied agent workflow as authority. The framework repository owns its source,
 tests, OpenSpec records, architecture, and ADRs—not agent prompts.
 
-Framework commits belong only to a solid-node repository or one of its
+Framework commits belong only to a machinome repository or one of its
 worktrees. Mechanical-project commits never do.
 
-The browser viewer is not framework source. solid-node is Apache-2.0 and
-complete without it: `solid develop` opens OpenSCAD when the viewer package
+The browser viewer is not framework source. machinome is Apache-2.0 and
+complete without it: `machinome develop` opens OpenSCAD when the viewer package
 is absent, and the commands that need the browser viewer name the `viewer`
 extra. A framework change that needs the viewer to change is two changes in
 two repositories, and nothing of the viewer's code may be moved into the
-framework; see "solid-node-viewer work".
+framework; see "machinome-viewer work".
 
 ### Shop work
 
@@ -252,13 +252,13 @@ optionally exact OCCT solids, and the JavaScript package evaluates the same
 spec to three.js buffers at frame rate, the two pinned to each other by
 shared parity fixtures.
 
-molejo was born from a solid-node flexible-leaf finding and is the
-flexible-part technology solid-node adapts, but it is its own product:
+molejo was born from a machinome flexible-leaf finding and is the
+flexible-part technology machinome adapts, but it is its own product:
 independently consumable by any Python or three.js project, and depending on
 nothing else in this workspace. Do not treat it as part of the framework, and
 do not fold a molejo change into a framework cycle.
 
-Like solid-node, molejo is released: version 0.2.0 implementing spec
+Like machinome, molejo is released: version 0.2.0 implementing spec
 version `"0.2"`, on PyPI and on npm, with the manual at
 <https://molejo.readthedocs.io>. Both packages carry the spec version they
 implement and release together for it; neither runtime is ever published
@@ -275,31 +275,31 @@ worktree or sprint machinery, and never staged in the shop repository. Read
 their status claims as honest as this file's: a released capability is one the
 published version actually has, with the recorded gaps.
 
-### solid-node-viewer work
+### machinome-viewer work
 
-`solid-node-viewer/` is an ignored, independent Git repository
-(<https://github.com/LibreSolid/solid-node-viewer>) holding the browser
-viewer for solid-node models: the embeddable three.js widget with its
+`machinome-viewer/` is an ignored, independent Git repository
+(<https://github.com/machinome/machinome-viewer>) holding the browser
+viewer for machinome models: the embeddable three.js widget with its
 driver controls and molejo evaluation, the standalone export page, the
-development server `solid develop` launches, and the headless capture behind
-`solid snapshot --renderer web`. It is licensed AGPL-3.0-only, where the
+development server `machinome develop` launches, and the headless capture behind
+`machinome snapshot --renderer web`. It is licensed AGPL-3.0-only, where the
 framework is Apache-2.0, and that difference is why it is a separate
 package: the framework installs it as its optional `viewer` extra, finds it
 through one entry point, and runs it as a separate process; neither package
 imports the other. The shop floor serves the bundle that package carries,
-still obtained through the framework's `solid viewer` report.
+still obtained through the framework's `machinome viewer` report.
 
 The viewer is the framework's viewer and nothing else's dependency, but it
 is its own product with its own history, README, changelog, OpenSpec records
-at `solid-node-viewer/openspec/` and decision log at
-`solid-node-viewer/docs/adrs/` (the viewer-owned ADRs relocated from the
+at `machinome-viewer/openspec/` and decision log at
+`machinome-viewer/docs/adrs/` (the viewer-owned ADRs relocated from the
 framework under their original numbers). Work on it happens inside that
 repository — not through the shop's worktree or sprint machinery, never
 staged in the shop repository, and never folded into a framework cycle. A
 change that spans both packages is one change in each, and the contract
-between them — the `solid_node.viewer` entry point and the
-`solid-node-viewer describe|serve|capture` commands — is specified on both
-sides. Read `solid-node-viewer/README.md` and `solid-node-viewer/CHANGELOG.md`
+between them — the `machinome.viewer` entry point and the
+`machinome-viewer describe|serve|capture` commands — is specified on both
+sides. Read `machinome-viewer/README.md` and `machinome-viewer/CHANGELOG.md`
 before working there, and keep their status claims honest: 0.1.0 is
 founded, not released; `scripts/check-dist` there builds and smokes the
 distributions and uploads nothing, and publishing is the pilot's explicit
@@ -314,7 +314,7 @@ intended) installs a browser extension, the studio opens in a side panel next
 to the conversation, and the assistant reaches the studio over MCP — no local
 install, no API key, just the maker's existing assistant subscription. Two
 candidate architectures are being evaluated and neither is chosen: render all
-CAD in Python inside the MCP server, or pack the solid-node stack into the
+CAD in Python inside the MCP server, or pack the machinome stack into the
 browser with WebAssembly. That choice is the pilot's; prototype findings are
 evidence for it, not requirements.
 
@@ -374,8 +374,8 @@ until final integration. A sprint always has shop branch and worktree
 `sprint-NNN` and `WTs/sprint-NNN`. When ratified scope includes framework work,
 it also has
 framework branch and worktree `sprint-NNN` and
-`solid-node/WTs/sprint-NNN`. The latter is linked at
-`WTs/sprint-NNN/solid-node` inside the shop sprint worktree so combined
+`machinome-framework/WTs/sprint-NNN`. The latter is linked at
+`WTs/sprint-NNN/machinome-framework` inside the shop sprint worktree so combined
 validation uses the exact paired integration content.
 
 Each cycle branches from the current sprint integration head in the repository
@@ -426,13 +426,13 @@ to the pilot rather than silently changing the spec.
 
 The normal workspace layout is:
 
-    libresolid-studio/        this repository: the harness
-    solid-node/             ignored independent framework repository
-    solid-node/WTs/<name>/  ignored framework worktrees
+    machinome-studio/        this repository: the harness
+    machinome-framework/             ignored independent framework repository
+    machinome-framework/WTs/<name>/  ignored framework worktrees
     WTs/<name>/             ignored shop worktrees
     projects/<name>/        ignored independent project repositories
     molejo/                 ignored independent published library repository
-    solid-node-viewer/      ignored independent viewer repository (AGPL)
+    machinome-viewer/      ignored independent viewer repository (AGPL)
     browser-engine/         ignored independent browser-delivery prototype
     mcp-server/             ignored independent browser-delivery prototype
     browser-plugin/         ignored independent browser-delivery prototype
@@ -449,9 +449,9 @@ repository, the viewer repository, browser-delivery prototypes, worktrees, or
 archives merely because the outer shop repository does not track them.
 
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
-plain, installing `solid-node[viewer]`; tier 2 development clones at
-`solid-node/` and `solid-node-viewer/`), the workspace venv at
-`.venv/` whose CLI is `.venv/bin/solid`, `scripts/dev-env <name> setup|teardown`
+plain, installing `machinome[viewer]`; tier 2 development clones at
+`machinome-framework/` and `machinome-viewer/`), the workspace venv at
+`.venv/` whose CLI is `.venv/bin/machinome`, `scripts/dev-env <name> setup|teardown`
 for per-slot framework benches, and
 `python -m floor.orchestrator --projects-dir <path>` for the project hub. Run
 bench code from inside the bench so its `.env` is picked up,
@@ -547,10 +547,10 @@ file governs *how to work*; the overview governs *what the system is*.
   proposal, ratification, implementation, integration, and cleanup.
 - `skills/running-the-shop/SKILL.md` — opening a floor: launcher command,
   project/profile parameters, project-owned runtime selection, and launch failures.
-- `skills/simulate-project/SKILL.md` — adding a solid-node simulation layer
+- `skills/simulate-project/SKILL.md` — adding a machinome simulation layer
   to an existing open-source project directly from this conversation.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
-- `shop-skills/` — shared solid-node API and machining skills: allowlisted to
+- `shop-skills/` — shared machinome API and machining skills: allowlisted to
   runtime agents, and read here when a project is built directly.
 - `docs/product/stories/` — pilot-authored inputs to shop OpenSpec changes.
 - `scripts/setup` — plain or development workspace bootstrap.
@@ -559,10 +559,10 @@ file governs *how to work*; the overview governs *what the system is*.
   the contribution workflow is published.
 - `molejo/README.md` — independent published library repository for analytic
   flexible parts; see "molejo library work".
-- `solid-node/workflow/README.md` — the framework's pre-spec working record:
+- `machinome-framework/workflow/README.md` — the framework's pre-spec working record:
   findings (`warts.md`), provisional plans, and archived campaigns.
-- `solid-node-viewer/README.md` — independent AGPL viewer repository, the
-  framework's `viewer` extra; see "solid-node-viewer work".
+- `machinome-viewer/README.md` — independent AGPL viewer repository, the
+  framework's `viewer` extra; see "machinome-viewer work".
 - `browser-engine/README.md`, `mcp-server/README.md`,
   `browser-plugin/README.md` — independent browser-delivery prototype
   repositories; see "Browser delivery prototypes".

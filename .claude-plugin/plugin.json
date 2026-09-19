@@ -1,13 +1,13 @@
 {
-  "name": "libresolid-studio",
-  "displayName": "LibreSolid Studio",
+  "name": "machinome-studio",
+  "displayName": "Machinome Studio",
   "version": "0.1.0",
-  "description": "LibreSolid Studio builds 3D-printable mechanical CAD projects with solid-node using designer, test-first machinist, and CAD-library librarian agents.",
+  "description": "Machinome Studio builds 3D-printable mechanical CAD projects with machinome using designer, test-first machinist, and CAD-library librarian agents.",
   "author": {
     "name": "Luis Fagundes"
   },
-  "homepage": "https://github.com/LibreSolid/libresolid-studio",
-  "repository": "https://github.com/LibreSolid/libresolid-studio",
+  "homepage": "https://github.com/machinome/machinome-studio",
+  "repository": "https://github.com/machinome/machinome-studio",
   "license": "AGPL-3.0-only",
-  "keywords": ["cad", "mechanical", "3d-printing", "solid-node", "cadquery", "tdd"]
+  "keywords": ["cad", "mechanical", "3d-printing", "machinome", "cadquery", "tdd"]
 }

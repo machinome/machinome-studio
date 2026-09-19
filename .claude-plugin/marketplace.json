@@ -1,14 +1,14 @@
 {
-  "name": "solid-node",
+  "name": "machinome",
   "owner": {
     "name": "Luis Fagundes"
   },
-  "description": "LibreSolid Studio tools for building mechanical CAD projects with the solid-node framework.",
+  "description": "Machinome Studio tools for building mechanical CAD projects with the machinome framework.",
   "plugins": [
     {
-      "name": "libresolid-studio",
+      "name": "machinome-studio",
       "source": "./",
-      "description": "LibreSolid Studio: designer, machinist, and librarian agents for solid-node mechanical CAD projects."
+      "description": "Machinome Studio: designer, machinist, and librarian agents for machinome mechanical CAD projects."
     }
   ]
 }
