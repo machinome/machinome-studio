@@ -24,7 +24,7 @@
 # Python and OpenSCAD. Tier 2 is the contributor bench: framework, viewer and
 # mechanics as working copies side by side, the viewer's widget and development
 # app built from source so they can be worked on. Nothing is built inside
-# machinome-framework/: it has no frontend.
+# machinome/: it has no frontend.
 #
 # Running `setup dev` on a tier-1 workspace upgrades it in place (the
 # pip-installed packages are replaced by the editable working copies).
@@ -41,8 +41,8 @@ set -euo pipefail
 SHOP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="$SHOP_ROOT/.venv"
 VENV_PYTHON="$VENV/bin/python"
-FRAMEWORK_DIR="$SHOP_ROOT/machinome-framework"
-FRAMEWORK_REPO="${MACHINOME_REPO:-https://github.com/machinome/machinome-framework.git}"
+FRAMEWORK_DIR="$SHOP_ROOT/machinome"
+FRAMEWORK_REPO="${MACHINOME_REPO:-https://github.com/machinome/machinome.git}"
 VIEWER_DIR="$SHOP_ROOT/machinome-viewer"
 VIEWER_REPO="${MACHINOME_VIEWER_REPO:-https://github.com/machinome/machinome-viewer.git}"
 MECHANICS_DIR="$SHOP_ROOT/machinome-mechanics"

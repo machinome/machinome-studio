@@ -158,8 +158,8 @@ first for every framework mutation. Do not dispatch mechanical-project roles
 to design or implement framework changes. Read the target framework checkout's
 architecture, baseline specs, and relevant decisions before work.
 
-Use an isolated framework worktree at `./machinome-framework/WTs/<name>/`; never make
-framework changes in the primary `./machinome-framework/` checkout.
+Use an isolated framework worktree at `./machinome/WTs/<name>/`; never make
+framework changes in the primary `./machinome/` checkout.
 
 Framework cycles are standalone by default. A framework cycle belongs to an
 active sprint only when the pilot explicitly includes it in that sprint's
@@ -179,7 +179,7 @@ keeps finished campaigns — audits, due diligences, remediation programmes —
 with their reports and raw evidence. Record a finding there when a project
 produces one, and work a plan out there before proposing, so a settled
 direction does not live only in a conversation. Read
-`machinome-framework/workflow/README.md` for its conventions. Nothing in `workflow/` is
+`machinome/workflow/README.md` for its conventions. Nothing in `workflow/` is
 ratified: it is evidence and intent, never authority over a baseline spec or an
 accepted ADR, and it is framework material committed to the framework
 repository, never staged in the shop.
@@ -374,8 +374,8 @@ until final integration. A sprint always has shop branch and worktree
 `sprint-NNN` and `WTs/sprint-NNN`. When ratified scope includes framework work,
 it also has
 framework branch and worktree `sprint-NNN` and
-`machinome-framework/WTs/sprint-NNN`. The latter is linked at
-`WTs/sprint-NNN/machinome-framework` inside the shop sprint worktree so combined
+`machinome/WTs/sprint-NNN`. The latter is linked at
+`WTs/sprint-NNN/machinome` inside the shop sprint worktree so combined
 validation uses the exact paired integration content.
 
 Each cycle branches from the current sprint integration head in the repository
@@ -427,8 +427,8 @@ to the pilot rather than silently changing the spec.
 The normal workspace layout is:
 
     machinome-studio/        this repository: the harness
-    machinome-framework/             ignored independent framework repository
-    machinome-framework/WTs/<name>/  ignored framework worktrees
+    machinome/             ignored independent framework repository
+    machinome/WTs/<name>/  ignored framework worktrees
     WTs/<name>/             ignored shop worktrees
     projects/<name>/        ignored independent project repositories
     molejo/                 ignored independent published library repository
@@ -450,7 +450,7 @@ archives merely because the outer shop repository does not track them.
 
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
 plain, installing `machinome[viewer]`; tier 2 development clones at
-`machinome-framework/` and `machinome-viewer/`), the workspace venv at
+`machinome/` and `machinome-viewer/`), the workspace venv at
 `.venv/` whose CLI is `.venv/bin/machinome`, `scripts/dev-env <name> setup|teardown`
 for per-slot framework benches, and
 `python -m floor.orchestrator --projects-dir <path>` for the project hub. Run
@@ -559,7 +559,7 @@ file governs *how to work*; the overview governs *what the system is*.
   the contribution workflow is published.
 - `molejo/README.md` — independent published library repository for analytic
   flexible parts; see "molejo library work".
-- `machinome-framework/workflow/README.md` — the framework's pre-spec working record:
+- `machinome/workflow/README.md` — the framework's pre-spec working record:
   findings (`warts.md`), provisional plans, and archived campaigns.
 - `machinome-viewer/README.md` — independent AGPL viewer repository, the
   framework's `viewer` extra; see "machinome-viewer work".
