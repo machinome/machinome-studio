@@ -292,7 +292,7 @@ still obtained through the framework's `machinome viewer` report.
 The viewer is the framework's viewer and nothing else's dependency, but it
 is its own product with its own history, README, changelog, OpenSpec records
 at `machinome-viewer/openspec/` and decision log at
-`machinome-viewer/docs/adrs/` (the viewer-owned ADRs relocated from the
+`machinome-viewer/workflow/adrs/` (the viewer-owned ADRs relocated from the
 framework under their original numbers). Work on it happens inside that
 repository — not through the shop's worktree or sprint machinery, never
 staged in the shop repository, and never folded into a framework cycle. A
