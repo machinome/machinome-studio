@@ -42,6 +42,12 @@ unrelated process.
   on their existing assistant subscription, is under active exploration in
   three independent prototype repositories (see "Browser delivery
   prototypes"). No delivery architecture has been chosen.
+- `machinome.org`, the public website for the whole ecosystem, has just been
+  founded as an independent repository beside this one. It holds the guiding
+  specs, the editorial spine and the design proposal moved out of this shop,
+  and its first two OpenSpec changes, none of them ratified. Nothing is
+  built, nothing is deployed, and no site is live at any address (see
+  "machinome.org site work").
 - An agent never infers permission to push, publish, open a PR, or contact a
   contributor. Do so only when the pilot explicitly asks.
 
@@ -305,6 +311,40 @@ founded, not released; `scripts/check-dist` there builds and smokes the
 distributions and uploads nothing, and publishing is the pilot's explicit
 decision.
 
+### machinome.org site work
+
+`machinome.org/` is an ignored, independent Git repository holding the public
+website for the whole machinome ecosystem: the Foundry of reconstructed
+machines, the software packages with their complete hosted manuals, Luis's
+articles, the videos, and the standing pages recording the people, the
+credits, the licensing policy and how AI was used.
+
+It is its own product. Its editorial authority is its own
+`docs/editorial-spine.md` and `docs/guiding-specs.md`, its visual design is
+its own `docs/design/`, and its work runs through its own OpenSpec records at
+`machinome.org/openspec/` — not through the shop's worktree or sprint
+machinery, and never staged in the shop repository. It depends on nothing
+else in the workspace at build time except the artifacts other repositories
+publish: viewer exports, model previews, package manuals, and the facts a
+project's `CREDITS` and `NOTICE` record. Nothing in the shop depends on it.
+
+The site restates nothing it does not own. A manual's text belongs to its
+package, a project's credits belong to the project's records, and a
+correction is made upstream and arrives with the next build. Read
+`machinome.org/README.md` and `machinome.org/docs/roadmap.md` before working
+there, and keep its status claims as honest as this file's: founded means
+founded, the site is not built and not published, and publication — the
+launch set, the domain, the hosting account, the announcement and the e-mail
+to project authors — is the pilot's explicit decision and never a side effect
+of a green build.
+
+The site publishes other people's work under other people's licences beside
+machine-written text. Its editorial law is therefore binding, not stylistic:
+status honesty, reconstruction honesty, AI disclosure, credits compiled and
+never inferred, the three licence words with held projects never listed, no
+safety or security claims, and no positioning. Its own `README.md` states
+them.
+
 ### Browser delivery prototypes
 
 `browser-engine/`, `mcp-server/`, and `browser-plugin/` are three ignored,
@@ -433,6 +473,7 @@ The normal workspace layout is:
     projects/<name>/        ignored independent project repositories
     molejo/                 ignored independent published library repository
     machinome-viewer/      ignored independent viewer repository (AGPL)
+    machinome.org/          ignored independent public website repository
     browser-engine/         ignored independent browser-delivery prototype
     mcp-server/             ignored independent browser-delivery prototype
     browser-plugin/         ignored independent browser-delivery prototype
@@ -440,13 +481,15 @@ The normal workspace layout is:
 Repository membership, not directory nesting, defines ownership. Before every
 commit, run `git rev-parse --show-toplevel` in the target and confirm it is the
 repository intended for that change. Never stage the ignored framework clone,
-a project, the molejo repository, the viewer repository, a browser-delivery
-prototype, generated CAD artifacts, or a worktree in the shop repository.
+a project, the molejo repository, the viewer repository, the machinome.org
+repository, a browser-delivery prototype, generated CAD artifacts, or a
+worktree in the shop repository.
 
 Preserve pre-existing dirty state and unrelated user files. In particular,
 do not delete or absorb ignored projects, framework checkouts, the molejo
-repository, the viewer repository, browser-delivery prototypes, worktrees, or
-archives merely because the outer shop repository does not track them.
+repository, the viewer repository, the machinome.org repository,
+browser-delivery prototypes, worktrees, or archives merely because the outer
+shop repository does not track them.
 
 `README.md` describes the workspace mechanics in full: `scripts/setup` (tier 1
 plain, installing `machinome[viewer]`; tier 2 development clones at
@@ -563,6 +606,9 @@ file governs *how to work*; the overview governs *what the system is*.
   findings (`warts.md`), provisional plans, and archived campaigns.
 - `machinome-viewer/README.md` — independent AGPL viewer repository, the
   framework's `viewer` extra; see "machinome-viewer work".
+- `machinome.org/README.md` — independent public website repository; its
+  editorial spine, design proposal and roadmap; see "machinome.org site
+  work".
 - `browser-engine/README.md`, `mcp-server/README.md`,
   `browser-plugin/README.md` — independent browser-delivery prototype
   repositories; see "Browser delivery prototypes".
