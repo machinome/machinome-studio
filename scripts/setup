@@ -146,7 +146,9 @@ tier2() {
 
   say "tier 2 (development): editable install of the framework working copy"
   "$VENV_PYTHON" -m pip uninstall --quiet --yes machinome 2>/dev/null || true
-  "$VENV_PYTHON" -m pip install --editable "$FRAMEWORK_DIR"
+  # Expose the source path directly: the default editable finder otherwise
+  # lets the outer machinome/ checkout shadow the package from the shop cwd.
+  "$VENV_PYTHON" -m pip install --editable "$FRAMEWORK_DIR" --config-settings editable_mode=compat
   "$VENV_PYTHON" -m pip install rtree scipy
 
   if [ ! -d "$MECHANICS_DIR/.git" ]; then
