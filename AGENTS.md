@@ -171,6 +171,12 @@ architecture, baseline specs, and relevant decisions before work.
 Use an isolated framework worktree at `./machinome/WTs/<name>/`; never make
 framework changes in the primary `./machinome/` checkout.
 
+The user manuals of the framework, the viewer and the mechanics package are
+written and released under `skills/write-the-manual/SKILL.md`: the layout by
+reader intent, release facts stated once, sibling links that exist, examples
+on the public contract, and the tests that pin them. Read it before touching
+a page a reader is sent to, in any of the three repositories.
+
 Framework cycles are standalone by default. A framework cycle belongs to an
 active sprint only when the pilot explicitly includes it in that sprint's
 ratified scope. It then branches from and integrates into the framework's
@@ -605,6 +611,9 @@ file governs *how to work*; the overview governs *what the system is*.
   project/profile parameters, project-owned runtime selection, and launch failures.
 - `skills/simulate-project/SKILL.md` — adding a machinome simulation layer
   to an existing open-source project directly from this conversation.
+- `skills/write-the-manual/SKILL.md` — writing, revising and releasing the
+  framework, viewer and mechanics user manuals without repeating the 0.7
+  pass's defects.
 - `profiles/` — trusted runtime topology, prompts, and allowlisted skills.
 - `shop-skills/` — shared machinome API and machining skills: allowlisted to
   runtime agents, and read here when a project is built directly.
