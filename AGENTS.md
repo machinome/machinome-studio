@@ -13,22 +13,29 @@ unrelated process.
 
 ## Current status
 
-- `machinome` is released: 0.6.0 on PyPI (1 September 2026), the release
-  that makes a model a machine. Its main branch has moved on since, the
-  declarative node API among the merged changes, none of it pushed or
-  released. Framework changes must preserve that level of usefulness.
+- `machinome` is released: the last published version is 0.6.0, on PyPI
+  under the old name `solid-node` (1 September 2026), the release that
+  makes a model a machine. Its main branch holds Machinome 0.7.0 at
+  released state, dated 22 September 2026 in its records: the rename, the
+  declarative node API, the motion layer, running and clocked machines,
+  and the 22 September source-timing correction that makes running
+  exports declare document version 11. Nothing of it is pushed or
+  uploaded; `docs/v0.7.0-checklist.md` lists what publication still
+  needs. Framework changes must preserve that level of usefulness.
 - `molejo`, the analytic flexible-parts library born from a machinome
   flexible-leaf finding, is released and public: 0.2.0 on PyPI and on npm,
-  with its manual at <https://molejo.readthedocs.io>. Like the framework it
-  is genuinely published, and its claims are held to that standard (see
-  "molejo library work").
+  with its manual at <https://molejo.readthedocs.io>. Its main branch holds
+  0.2.1, which caps the `brep` extra below OCP 8, prepared and not yet
+  pushed or uploaded. Like the framework it is genuinely published, and its
+  claims are held to that standard (see "molejo library work").
 - `machinome-viewer`, the browser viewer for machinome models, has just
   left the framework to become an independent AGPL-3.0-only repository and
   package, installed through the framework's `viewer` extra and reached only
-  as a separate process. Version 0.1.0 is founded but not yet published on
-  any index or pushed to its remote; the framework, this shop and its own
-  records already describe it as the viewer's home (see "machinome-viewer
-  work"). Do not describe it as released.
+  as a separate process. Version 0.7.0, numbered with the framework and
+  declaring viewer API 24 and document versions 1 to 11, is at released
+  state in its records but not yet uploaded to any index or pushed to its
+  remote, whose tree is still the old `solid-node-viewer` (see
+  "machinome-viewer work"). Do not describe it as published.
 - `machinome-studio` is private and experimental. Its roles, prompts, and
   development disciplines are being exercised and revised before release.
 - The public community-contribution workflow described by the shop is the
@@ -276,7 +283,9 @@ do not fold a molejo change into a framework cycle.
 
 Like machinome, molejo is released: version 0.2.0 implementing spec
 version `"0.2"`, on PyPI and on npm, with the manual at
-<https://molejo.readthedocs.io>. Both packages carry the spec version they
+<https://molejo.readthedocs.io>; 0.2.1, the same spec with the `brep`
+extra capped below OCP 8, is prepared on its main branch and awaits the
+pilot's upload. Both packages carry the spec version they
 implement and release together for it; neither runtime is ever published
 against a spec version the other has not caught up to. Publishing is the
 pilot's explicit decision and never a side effect of building —
@@ -316,8 +325,8 @@ change that spans both packages is one change in each, and the contract
 between them — the `machinome.viewer` entry point and the
 `machinome-viewer describe|serve|capture` commands — is specified on both
 sides. Read `machinome-viewer/README.md` and `machinome-viewer/CHANGELOG.md`
-before working there, and keep their status claims honest: 0.1.0 is
-founded, not released; `scripts/check-dist` there builds and smokes the
+before working there, and keep their status claims honest: 0.7.0 is at
+released state, not yet published; `scripts/check-dist` there builds and smokes the
 distributions and uploads nothing, and publishing is the pilot's explicit
 decision.
 
