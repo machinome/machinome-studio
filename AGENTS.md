@@ -491,6 +491,12 @@ to the pilot rather than silently changing the spec.
   the running shop implementation.
 - Never inspect or use sibling repositories or their executables. If an
   expected path inside this workspace is absent, stop and report it.
+- On a collaborator's machine the workspace is built, not inherited:
+  `docs/collaborator-setup.md` says which repositories to clone where, which
+  are private, which exist only on the pilot's machine, and how a fresh clone
+  may lag the status above. An agent in a workspace that lacks
+  `machinome/`, `machinome-viewer/` or `.venv/` follows it before any other
+  work.
 
 The normal workspace layout is:
 
@@ -628,6 +634,8 @@ file governs *how to work*; the overview governs *what the system is*.
   runtime agents, and read here when a project is built directly.
 - `docs/product/stories/` — pilot-authored inputs to shop OpenSpec changes.
 - `scripts/setup` — plain or development workspace bootstrap.
+- `docs/collaborator-setup.md` — building the whole workspace, every
+  repository included, on a collaborator's machine.
 - `scripts/dev-env` — isolated framework worktree benches.
 - `governance/` — proposed public contribution templates; experimental until
   the contribution workflow is published.
