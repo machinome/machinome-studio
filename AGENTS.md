@@ -35,7 +35,7 @@ unrelated process.
   left the framework to become an independent AGPL-3.0-only repository and
   package, installed through the framework's `viewer` extra and reached only
   as a separate process. Version 0.7.0, numbered with the framework and
-  declaring viewer API 26 and document versions 1 to 13, is at released
+  declaring viewer API 27 and document versions 1 to 13, is at released
   state in its records and tagged `v0.7.0` locally; the tag is not pushed
   and it is not uploaded to any index (see "machinome-viewer work"). Do
   not describe it as published.
