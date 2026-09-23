@@ -16,12 +16,13 @@ unrelated process.
 - `machinome` is released: the last published version is 0.6.0, on PyPI
   under the old name `solid-node` (1 September 2026), the release that
   makes a model a machine. Its main branch holds Machinome 0.7.0 at
-  released state, dated 22 September 2026 in its records: the rename, the
+  released state, dated 23 September 2026 in its records: the rename, the
   declarative node API, the motion layer, running and clocked machines,
-  and the 22 September source-timing correction that makes running
-  exports declare document version 11. Nothing of it is pushed or
-  uploaded; `docs/v0.7.0-checklist.md` lists what publication still
-  needs. Framework changes must preserve that level of usefulness.
+  the 22 September source-timing correction that makes running exports
+  declare document version 11, and the 23 September `Follow` law between
+  two moving surfaces, whose exports declare version 12. Nothing of it is
+  pushed or uploaded; `docs/v0.7.0-checklist.md` lists what publication
+  still needs. Framework changes must preserve that level of usefulness.
 - `molejo`, the analytic flexible-parts library born from a machinome
   flexible-leaf finding, is released and public: 0.2.0 on PyPI and on npm,
   with its manual at <https://molejo.readthedocs.io>. Its main branch holds
@@ -32,7 +33,7 @@ unrelated process.
   left the framework to become an independent AGPL-3.0-only repository and
   package, installed through the framework's `viewer` extra and reached only
   as a separate process. Version 0.7.0, numbered with the framework and
-  declaring viewer API 24 and document versions 1 to 11, is at released
+  declaring viewer API 25 and document versions 1 to 12, is at released
   state in its records but not yet uploaded to any index or pushed to its
   remote, whose tree is still the old `solid-node-viewer` (see
   "machinome-viewer work"). Do not describe it as published.
