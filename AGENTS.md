@@ -22,9 +22,9 @@ unrelated process.
   declare document version 11, the 23 September `Follow` law between
   two moving surfaces, whose exports declare version 12, and the
   23 September finite profile contact inside a running `Bound`, whose
-  exports declare version 13. Its main is pushed but nothing is tagged or
-  uploaded; `docs/v0.7.0-checklist.md` lists what publication still
-  needs. Framework changes must preserve that level of usefulness.
+  exports declare version 13. It is tagged `v0.7.0` locally; the tag is
+  not pushed and nothing is uploaded. `docs/v0.7.0-checklist.md` lists
+  what publication still needs. Framework changes must preserve that level of usefulness.
 - `molejo`, the analytic flexible-parts library born from a machinome
   flexible-leaf finding, is released and public: 0.2.0 on PyPI and on npm,
   with its manual at <https://molejo.readthedocs.io>. Its main branch holds
@@ -36,9 +36,9 @@ unrelated process.
   package, installed through the framework's `viewer` extra and reached only
   as a separate process. Version 0.7.0, numbered with the framework and
   declaring viewer API 26 and document versions 1 to 13, is at released
-  state in its records and pushed to its remote, but not yet tagged or
-  uploaded to any index (see "machinome-viewer work"). Do not describe it
-  as published.
+  state in its records and tagged `v0.7.0` locally; the tag is not pushed
+  and it is not uploaded to any index (see "machinome-viewer work"). Do
+  not describe it as published.
 - `machinome-studio` is private and experimental. Its roles, prompts, and
   development disciplines are being exercised and revised before release.
 - The public community-contribution workflow described by the shop is the
