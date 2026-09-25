@@ -32,7 +32,7 @@ unrelated process.
   pushed or uploaded. Like the framework it is genuinely published, and its
   claims are held to that standard (see "molejo library work").
 - `machinome-viewer`, the browser viewer for machinome models, has just
-  left the framework to become an independent AGPL-3.0-only repository and
+  left the framework to become an independent AGPL-3.0-or-later repository and
   package, installed through the framework's `viewer` extra and reached only
   as a separate process. Version 0.7.0, numbered with the framework and
   declaring viewer API 27 and document versions 1 to 13, is at released
@@ -310,8 +310,8 @@ published version actually has, with the recorded gaps.
 viewer for machinome models: the embeddable three.js widget with its
 driver controls and molejo evaluation, the standalone export page, the
 development server `machinome develop` launches, and the headless capture behind
-`machinome snapshot --renderer web`. It is licensed AGPL-3.0-only, where the
-framework is Apache-2.0, and that difference is why it is a separate
+`machinome snapshot --renderer web`. It is licensed AGPL-3.0-or-later, where
+the framework is Apache-2.0, and that difference is why it is a separate
 package: the framework installs it as its optional `viewer` extra, finds it
 through one entry point, and runs it as a separate process; neither package
 imports the other. The shop floor serves the bundle that package carries,
