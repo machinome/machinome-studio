@@ -110,4 +110,5 @@ ensure_snapshot_browser
 install_studio
 
 say "done. Activate with: source $VENV/bin/activate"
-say "open the project hub with: python -m floor.orchestrator --projects-dir PATH"
+say "open the project hub with: machinome-studio --projects-dir PATH"
+say "or write PATH once in \$HOME/.config/machinome-studio/config.toml and run: machinome-studio"

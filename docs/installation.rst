@@ -65,6 +65,7 @@ and the API it declares. The studio opens a project only with API
 commands confirm the prerequisite the hub checks and the backend it
 reports.
 
+``machinome-studio`` is now on ``PATH`` too, installed by the same step.
 Then start the hub: :doc:`opening-a-project`.
 
 Using Codex

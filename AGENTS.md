@@ -165,9 +165,10 @@ contract.
 ## Repository boundaries
 
 - Every mechanical project lives at `<projects-dir>/<name>/` as its own Git
-  repository. The catalogue path comes only from the launcher's required
-  `--projects-dir` option. Nothing about a project is ever staged or
-  committed here.
+  repository. The catalogue path comes only from the launcher's
+  `--projects-dir` option or the studio configuration file's `projects`
+  key; the studio never derives it. Nothing about a project is ever staged
+  or committed here.
 - `floor/static/` (the generated frontend build), `docs/_build/` (the built
   manual), `node_modules/`, `.venv/`, `WTs/` and generated CAD artifacts are
   never staged.
