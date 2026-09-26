@@ -7,6 +7,7 @@ from the floor's source as text; the pages use the substitutions this file
 defines and never the numbers.
 """
 
+import ast
 import re
 import tomllib
 from pathlib import Path
@@ -42,6 +43,20 @@ machinome_version = "0.7.0"
 required_viewer_api = constant(preparation, "REQUIRED_VIEWER_API")
 claude_models = names(constant(preparation, "CLAUDE_MODELS"))
 claude_efforts = names(constant(preparation, "CLAUDE_EFFORTS"))
+codex_auth = ast.parse((ROOT / "floor/codex_auth.py").read_text())
+codex_policy = ast.parse((ROOT / "floor/backends/codex_policy.py").read_text())
+
+
+def literal(tree: ast.Module, name: str):
+    """Read a literal declaration without importing runtime dependencies."""
+    return next(ast.literal_eval(node.value) for node in tree.body
+                if isinstance(node, ast.Assign)
+                and any(isinstance(target, ast.Name) and target.id == name for target in node.targets))
+
+
+codex_version = literal(codex_auth, "PINNED_VERSION")
+codex_models = list(literal(codex_policy, "MODEL_FINGERPRINTS"))
+codex_efforts = literal(codex_policy, "EFFORTS")
 build_volume = " × ".join(re.findall(r"\d+", constant(packaging, "BUILD_VOLUME"))) + " mm"
 
 rst_prolog = "\n".join([
@@ -49,6 +64,9 @@ rst_prolog = "\n".join([
     f".. |required-viewer-api| replace:: {required_viewer_api}",
     ".. |claude-models| replace:: " + ", ".join(f"``{name}``" for name in claude_models),
     ".. |claude-efforts| replace:: " + ", ".join(f"``{name}``" for name in claude_efforts),
+    f".. |codex-version| replace:: {codex_version}",
+    ".. |codex-models| replace:: " + ", ".join(f"``{name}``" for name in codex_models),
+    ".. |codex-efforts| replace:: " + ", ".join(f"``{name}``" for name in codex_efforts),
     f".. |build-volume| replace:: {build_volume}",
 ])
 

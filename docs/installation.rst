@@ -20,7 +20,8 @@ What you need
   snapshots.
 * **An agent backend, logged in.** `Claude Code
   <https://claude.com/claude-code>`_, the ``claude`` command, or `OpenCode
-  <https://opencode.ai/>`_, the ``opencode`` command. A project cannot open
+  <https://opencode.ai/>`_, the ``opencode`` command, or qualified Codex
+  with its separate Studio login described below. A project cannot open
   without one; the hub reports which it finds.
 
 Set up
@@ -65,6 +66,34 @@ commands confirm the prerequisite the hub checks and the backend it
 reports.
 
 Then start the hub: :doc:`opening-a-project`.
+
+Using Codex
+===========
+
+Studio supports |codex-version| on Linux x86_64. Install that exact Codex
+CLI on ``PATH``; ``scripts/setup`` does not install it. Studio checks its
+actual executable, model metadata and tool policy before offering it.
+Unsupported installations remain unavailable rather than using another
+backend or weakening permissions. Projects using other backends do not
+need Codex.
+
+With the hub stopped, provision a separate Studio login on your ChatGPT
+account from the studio's Python environment:
+
+.. code-block:: console
+
+   $ python -m floor.codex_auth login
+
+Follow the device-authorization instructions. Studio stores this login in
+``$XDG_STATE_HOME/machinome-studio/codex`` when that variable is an absolute
+path, otherwise in ``$HOME/.local/state/machinome-studio/codex``. It never
+copies or changes your ordinary Codex credentials. Closing projects removes
+their conversations, not this login. Only one hub or login command can own
+the store at a time.
+
+Select Codex explicitly using :doc:`reference/project-configuration` or
+the Agents controls. Claude remains the default. Supported models depend
+on account access as well as the studio's qualified catalogue.
 
 Rebuilding the browser surface
 ==============================

@@ -20,10 +20,11 @@ project without one. Where the framework and the viewer are published, and
 in which versions, is stated in their own manuals; the studio pins neither
 beyond that requirement.
 
-Linux is the only validated platform. The agent backends are Claude Code
-and OpenCode, chosen per agent by the project. Codex was retired as a
-backend because it could not enforce a profile's tool policy, and is not
-selectable.
+Linux is the only validated platform. The agent backends are Claude Code,
+OpenCode and qualified Codex, chosen per agent by the project. Codex is
+limited to |codex-version| on Linux x86_64, with the models and reasoning
+levels in :doc:`../reference/project-configuration`. Other versions and
+tool-affecting configurations are refused.
 
 Limits
 ======
@@ -34,7 +35,11 @@ Limits
 * The ``fordesmac`` librarian is out of service until the studio gives it
   a bounded research surface.
 * A session keeps nothing: the project's repository is the record, and the
-  agents commit but never push.
+  agents commit but never push. Codex's separate authentication persists,
+  but its ended project conversations do not.
+* Tool scoping does not OS-sandbox code executed by project builds or
+  tests. Codex cannot honor required signed commits. Its native refresh
+  path and login persistence were exercised, not multi-day expiry behavior.
 * The Build area's envelope fit is a bounding-box comparison, not a
   printability judgement. The studio does not slice and does not assess
   strength, tolerance or safety; nor does the framework.
