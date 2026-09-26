@@ -2,8 +2,8 @@
 Project status
 ==============
 
-Machinome Studio |release| is private, experimental and unpublished. It is
-on no package index; it is installed from a clone of its repository, as
+Machinome Studio |release| is experimental and unpublished. It is on no
+package index; it is installed from a clone of its repository, as
 :doc:`../installation` describes, and its version will move when there is
 something to release. Its profiles, its prompts and the disciplines its
 agents follow are being exercised on real projects and revised as those

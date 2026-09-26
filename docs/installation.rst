@@ -28,7 +28,7 @@ Set up
 
 .. code-block:: console
 
-   $ git clone git@github.com:machinome/machinome-studio.git
+   $ git clone https://github.com/machinome/machinome-studio.git
    $ cd machinome-studio
    $ scripts/setup
 

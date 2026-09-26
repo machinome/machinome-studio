@@ -17,8 +17,9 @@ checkout an agent is working in.
 
 ## Current status
 
-- Machinome Studio 0.1.0 is private, experimental and unpublished. It is on
-  no package index; installing it means cloning this repository.
+- Machinome Studio 0.1.0 is experimental and unpublished. Its repository is
+  public at <https://github.com/machinome/machinome-studio>; it is on no
+  package index, and installing it means cloning that repository.
 - It runs on Linux against the Claude Code or OpenCode backends and is still
   hacky to set up. Do not describe it as released or portable.
 - Its profiles, prompts and runtime disciplines are being exercised and
