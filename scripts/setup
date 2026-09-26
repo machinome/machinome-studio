@@ -2,61 +2,42 @@
 # Copyright (C) 2023-2026 Luis Henrique Cassis Fagundes
 # SPDX-License-Identifier: AGPL-3.0-only
 #
-# setup — bootstrap the shop workspace, in one of two tiers.
+# setup — bootstrap Machinome Studio in this checkout.
 #
-#   scripts/setup             tier 1 (plain): venv + pip install
-#                             "machinome[viewer]" and the viewer's
-#                             [snapshot] extra with its Chromium
-#   scripts/setup dev [ref]   tier 2 (development): the framework, viewer and
-#                             mechanics as git working copies (the framework
-#                             at its latest release tag by default, or the
-#                             given tag/branch/sha), both installed
-#                             editable, the viewer's frontends built from
-#                             source
+#   scripts/setup
+#
+# Creates the virtualenv at .venv/, installs the OpenSpec CLI the studio
+# refuses to start without, builds the studio's floor frontend from source,
+# installs "machinome[viewer]" and the viewer's [snapshot] extra with the
+# Chromium its headless capture needs, and installs the studio itself
+# editable into the venv.
 #
 # The browser viewer is not part of machinome. It is machinome-viewer, a
-# separate AGPL-3.0-only package the Apache-2.0 framework installs as its
-# [viewer] extra and reaches only as a separate process; the shop floor
-# serves the bundle that package carries. Tier 1 is enough to BUILD projects
-# with the shop: the two wheels ship everything prebuilt. Both tiers build
-# the shop's own floor frontend from source and both install the OpenSpec
-# CLI the shop refuses to start without, so node/npm is required alongside
-# Python and OpenSCAD. Tier 2 is the contributor bench: framework, viewer and
-# mechanics as working copies side by side, the viewer's widget and development
-# app built from source so they can be worked on. Nothing is built inside
-# machinome/: it has no frontend.
+# separate AGPL-3.0-or-later package the Apache-2.0 framework installs as its
+# [viewer] extra and reaches only as a separate process; the studio floor
+# serves the bundle that package carries. Both wheels ship everything
+# prebuilt, so node/npm is needed only for the studio's own frontend and the
+# OpenSpec CLI, alongside Python and OpenSCAD.
 #
-# Running `setup dev` on a tier-1 workspace upgrades it in place (the
-# pip-installed packages are replaced by the editable working copies).
-# Both tiers are idempotent — re-run freely.
-#
-# Env overrides:
-#   MACHINOME_REPO          framework clone URL (default: upstream; point
-#                            it at your fork to develop against that)
-#   MACHINOME_VIEWER_REPO   viewer clone URL (default: upstream)
-#   MACHINOME_MECHANICS_REPO mechanics clone URL (default: upstream)
+# Idempotent — re-run freely.
 
 set -euo pipefail
 
 SHOP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="$SHOP_ROOT/.venv"
 VENV_PYTHON="$VENV/bin/python"
-FRAMEWORK_DIR="$SHOP_ROOT/machinome"
-FRAMEWORK_REPO="${MACHINOME_REPO:-https://github.com/machinome/machinome.git}"
-VIEWER_DIR="$SHOP_ROOT/machinome-viewer"
-VIEWER_REPO="${MACHINOME_VIEWER_REPO:-https://github.com/machinome/machinome-viewer.git}"
-MECHANICS_DIR="$SHOP_ROOT/machinome-mechanics"
-MECHANICS_REPO="${MACHINOME_MECHANICS_REPO:-https://github.com/machinome/machinome-mechanics.git}"
 
 say() { echo "setup: $*"; }
 die() { echo "setup: $*" >&2; exit 1; }
+
+[ "$#" -eq 0 ] || die "usage: scripts/setup"
 
 ensure_venv() {
   if [ ! -x "$VENV_PYTHON" ]; then
     say "creating venv at $VENV"
     python3 -m venv "$VENV"
   fi
-  # Invoking the module through the venv interpreter survives a workspace
+  # Invoking the module through the venv interpreter survives a checkout
   # directory rename even when generated pip entry-point shebangs are stale.
   "$VENV_PYTHON" -m pip install --quiet --upgrade pip
 }
@@ -68,8 +49,8 @@ check_system_deps() {
   command -v git >/dev/null 2>&1 || die "git is required"
 }
 
-# The shop refuses to start without this: it is how a project records the
-# design of its parts, and a shop that cannot record one loses it silently.
+# The studio refuses to start without this: it is how a project records the
+# design of its parts, and a studio that cannot record one loses it silently.
 ensure_openspec_cli() {
   if command -v openspec >/dev/null 2>&1; then
     return
@@ -82,20 +63,26 @@ ensure_openspec_cli() {
            "(npm install -g @fission-ai/openspec) and re-run"
 }
 
-# The shop floor's browser surface is built, not committed: floor/static is
+# The floor's browser surface is built, not committed: floor/static is
 # generated output (Vite empties and rewrites it on every build), so a fresh
-# checkout has no UI until this runs. Both tiers need it — the floor is the
-# only way to open a project.
+# checkout has no UI until this runs. The floor is the only way to open a
+# project.
 build_floor_frontend() {
   command -v npm >/dev/null 2>&1 \
-    || die "npm is required to build the shop floor browser surface" \
+    || die "npm is required to build the studio floor browser surface" \
            "(floor/static is generated, not committed)"
-  say "building the shop floor frontend"
+  say "building the studio floor frontend"
   (cd "$SHOP_ROOT/floor/frontend" \
      && npm install --no-audit --no-fund && npm run build)
 }
 
-# The shop photographs every project it opens through
+install_machinome() {
+  say "installing machinome with its browser viewer from PyPI"
+  "$VENV_PYTHON" -m pip install --upgrade "machinome[viewer]" rtree scipy
+  "$VENV_PYTHON" -m pip install --upgrade "machinome-viewer[snapshot]"
+}
+
+# The studio photographs every project it opens through
 # `machinome snapshot --renderer web`, so the hub's model previews need the
 # viewer's headless capture: Playwright, which the [snapshot] extra installs,
 # and the Chromium build that exact Playwright expects. Without both, every
@@ -109,104 +96,18 @@ ensure_snapshot_browser() {
   }
 }
 
-tier1() {
-  say "tier 1 (plain): installing machinome with its browser viewer from PyPI"
-  "$VENV_PYTHON" -m pip install --upgrade "machinome[viewer]" rtree scipy
-  "$VENV_PYTHON" -m pip install --upgrade "machinome-viewer[snapshot]"
-  ensure_snapshot_browser
-  say "done. Activate with: source $VENV/bin/activate"
-  say "upgrade to the contributor bench anytime: scripts/setup dev"
-}
-
-latest_tag() {  # in $FRAMEWORK_DIR; empty if the repo has no tags
-  git -C "$FRAMEWORK_DIR" tag --sort=-v:refname | head -1
-}
-
-tier2() {
-  local ref="${1:-}"
-
-  if [ ! -d "$FRAMEWORK_DIR/.git" ]; then
-    say "cloning framework: $FRAMEWORK_REPO -> $FRAMEWORK_DIR"
-    git clone "$FRAMEWORK_REPO" "$FRAMEWORK_DIR"
-  else
-    say "framework clone present, fetching"
-    git -C "$FRAMEWORK_DIR" fetch --tags --prune
-  fi
-
-  if [ -z "$ref" ]; then
-    ref="$(latest_tag)"
-    if [ -z "$ref" ]; then
-      say "no release tags found — staying on the default branch"
-    fi
-  fi
-  if [ -n "$ref" ]; then
-    say "checking out $ref"
-    git -C "$FRAMEWORK_DIR" checkout --quiet "$ref"
-  fi
-
-  say "tier 2 (development): editable install of the framework working copy"
-  "$VENV_PYTHON" -m pip uninstall --quiet --yes machinome 2>/dev/null || true
-  # Expose the source path directly: the default editable finder otherwise
-  # lets the outer machinome/ checkout shadow the package from the shop cwd.
-  "$VENV_PYTHON" -m pip install --editable "$FRAMEWORK_DIR" --config-settings editable_mode=compat
-  "$VENV_PYTHON" -m pip install rtree scipy
-
-  if [ ! -d "$MECHANICS_DIR/.git" ]; then
-    say "cloning mechanics: $MECHANICS_REPO -> $MECHANICS_DIR"
-    git clone "$MECHANICS_REPO" "$MECHANICS_DIR" \
-      || die "could not clone $MECHANICS_REPO — set MACHINOME_MECHANICS_REPO to a reachable clone"
-  else
-    say "mechanics clone present, fetching"
-    git -C "$MECHANICS_DIR" fetch --tags --prune
-  fi
-  say "editable install of the mechanics working copy"
-  "$VENV_PYTHON" -m pip uninstall --quiet --yes machinome-mechanics 2>/dev/null || true
-  "$VENV_PYTHON" -m pip install --editable "$MECHANICS_DIR"
-
-  # The viewer beside it, as its own working copy: an independent
-  # repository with its own history, licence and process.
-  if [ ! -d "$VIEWER_DIR/.git" ]; then
-    say "cloning viewer: $VIEWER_REPO -> $VIEWER_DIR"
-    git clone "$VIEWER_REPO" "$VIEWER_DIR" \
-      || die "could not clone $VIEWER_REPO — set MACHINOME_VIEWER_REPO to a reachable clone"
-  else
-    say "viewer clone present, fetching"
-    git -C "$VIEWER_DIR" fetch --tags --prune
-  fi
-  say "editable install of the viewer working copy"
-  "$VENV_PYTHON" -m pip uninstall --quiet --yes machinome-viewer 2>/dev/null || true
-  "$VENV_PYTHON" -m pip install --editable "$VIEWER_DIR[snapshot]"
-  ensure_snapshot_browser
-
-  # The viewer's frontends from source: the widget and the development app.
-  # Needs npm; without it the bench still works for Python-side development,
-  # but the browser viewer and export widget are unavailable until npm is
-  # installed -- and `machinome develop` opens OpenSCAD instead.
-  if command -v npm >/dev/null 2>&1; then
-    say "building the viewer widget"
-    (cd "$VIEWER_DIR/machinome_viewer/widget" \
-       && npm install --no-audit --no-fund && npm run build)
-    say "building the viewer development app"
-    (cd "$VIEWER_DIR/machinome_viewer/app" \
-       && npm install --no-audit --no-fund && npm run build)
-  else
-    say "WARNING: npm not found — the viewer's widget and app are not built."
-    say "         Install node/npm and re-run: scripts/setup dev"
-  fi
-
-  say "done. Framework working copy: $FRAMEWORK_DIR ($(git -C "$FRAMEWORK_DIR" describe --tags --always))"
-  say "viewer working copy: $VIEWER_DIR ($(git -C "$VIEWER_DIR" describe --tags --always))"
-  say "mechanics working copy: $MECHANICS_DIR ($(git -C "$MECHANICS_DIR" describe --tags --always))"
-  say "framework worktrees: $FRAMEWORK_DIR/WTs/<name>"
-  say "create one with: scripts/dev-env <name> setup"
+install_studio() {
+  say "installing Machinome Studio editable from $SHOP_ROOT"
+  "$VENV_PYTHON" -m pip install --editable "$SHOP_ROOT"
 }
 
 ensure_venv
 check_system_deps
 ensure_openspec_cli
 build_floor_frontend
-case "${1:-plain}" in
-  plain) tier1 ;;
-  dev)   tier2 "${2:-}" ;;
-  *)     die "usage: scripts/setup [dev [ref]]" ;;
-esac
+install_machinome
+ensure_snapshot_browser
+install_studio
+
+say "done. Activate with: source $VENV/bin/activate"
+say "open the project hub with: python -m floor.orchestrator --projects-dir PATH"
