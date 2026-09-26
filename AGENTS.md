@@ -3,7 +3,7 @@
 This repository is Machinome Studio, the end-user product of the machinome
 ecosystem: a local agent harness in which a maker builds mechanical CAD
 projects with the machinome framework. It holds the floor runtime (the
-`floor/` package: the hub, per-project sessions, the Claude and OpenCode
+`floor/` package: the hub, per-project sessions, the Claude, OpenCode and scoped Codex
 backends and the browser frontend under `floor/frontend/`), the runtime
 profiles under `profiles/`, the shared runtime skills under `shop-skills/`,
 the tests, and the studio's own architecture, design, product and OpenSpec
@@ -19,7 +19,7 @@ checkout an agent is working in.
 
 - Machinome Studio 0.1.0 is private, experimental and unpublished. It is on
   no package index; installing it means cloning this repository.
-- It runs on Linux against the Claude Code or OpenCode backends and is still
+- It runs on Linux against Claude Code, OpenCode or qualified pinned Codex backends and is still
   hacky to set up. Do not describe it as released or portable.
 - Its profiles, prompts and runtime disciplines are being exercised and
   revised before any release.
