@@ -166,8 +166,9 @@ contract.
   repository. The catalogue path comes only from the launcher's required
   `--projects-dir` option. Nothing about a project is ever staged or
   committed here.
-- `floor/static/` (the generated frontend build), `node_modules/`, `.venv/`,
-  `WTs/` and generated CAD artifacts are never staged.
+- `floor/static/` (the generated frontend build), `docs/_build/` (the built
+  manual), `node_modules/`, `.venv/`, `WTs/` and generated CAD artifacts are
+  never staged.
 - Before every commit, run `git rev-parse --show-toplevel` and confirm it
   names this repository.
 - Preserve pre-existing dirty state and unrelated user files. Do not delete
@@ -248,9 +249,22 @@ The overview is not a design document, a proposal, or a spec. It describes
 the system that exists. This file governs how to work; the overview governs
 what the system is.
 
+The user manual is separate from all of that: the `.rst` pages under
+`docs/` (built with Sphinx; the Markdown records above are excluded from the
+build), `README.md`, `CHANGELOG.md` and the `floor` package's docstrings.
+It is written under the workspace's `write-the-manual` skill, and
+`tests/test_documentation.py` holds its shape: release facts derived from
+the package, the publication state on `docs/project/status.rst` only, no
+project name, worktree or sibling checkout on a reader-facing page.
+`workflow/` is the working record beside it: how the manual is built and
+would be hosted, and archived history that is not for a reader.
+
 ## Useful entry points
 
-- `README.md` — product overview, install, opening a floor, and the checks.
+- `README.md` — product overview, install, opening the hub, and the checks.
+- `docs/index.rst` — the user manual; `workflow/documentation.md` says how
+  it is built and checked.
+- `CHANGELOG.md` — what the current source gives a maker.
 - `docs/architecture-overview.md` — reference architecture; read before
   proposing any change.
 - `docs/design/README.md` — reference design for the application, with its
@@ -261,6 +275,8 @@ what the system is.
   skills.
 - `shop-skills/` — the shared runtime skills the profiles allowlist.
 - `openspec/` — baseline specs, active changes and the archive.
+- `workflow/` — the working record: the manual's build and hosting notes,
+  implementation notes and archived history.
 - `scripts/setup` — creates `.venv/` and installs the studio and its
   runtime dependencies.
 - `scripts/test-e2e` — builds the frontend and runs the end-to-end modules.
