@@ -8,6 +8,6 @@
   },
   "homepage": "https://github.com/machinome/machinome-studio",
   "repository": "https://github.com/machinome/machinome-studio",
-  "license": "AGPL-3.0-only",
+  "license": "AGPL-3.0-or-later",
   "keywords": ["cad", "mechanical", "3d-printing", "machinome", "cadquery", "tdd"]
 }
